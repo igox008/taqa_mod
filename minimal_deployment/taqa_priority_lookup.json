@@ -1,0 +1,2638 @@
+{
+  "equipment_priorities": {
+    "POMPES DE DESCHARGE": {
+      "mean": 3.0,
+      "count": 2,
+      "std": 0.0
+    },
+    "SERVOMOTEUR CLAPET DE NON RETOUR": {
+      "mean": 3.0,
+      "count": 3,
+      "std": 1.0
+    },
+    "évents ballon chaudière": {
+      "mean": 3.0,
+      "count": 2,
+      "std": 1.4142135623730951
+    },
+    "FILTRES D'AIR DE COMMANDE DES VANNES DE VIDANGE DES SAS": {
+      "mean": 3.0,
+      "count": 2,
+      "std": 1.4142135623730951
+    },
+    "Vidange Pompe Alimentaire N°10": {
+      "mean": 2.8,
+      "count": 5,
+      "std": 0.8366600265340756
+    },
+    "Registre au refoulement  ventilateur de souflage  B": {
+      "mean": 2.5,
+      "count": 2,
+      "std": 0.7071067811865476
+    },
+    "RESERVOIR HUILE DE CONTRÔLE": {
+      "mean": 2.5,
+      "count": 2,
+      "std": 0.7071067811865476
+    },
+    "SOUPAPE.": {
+      "mean": 2.5,
+      "count": 2,
+      "std": 0.7071067811865476
+    },
+    "CWP10 FILTRE DP": {
+      "mean": 2.5,
+      "count": 4,
+      "std": 0.5773502691896257
+    },
+    "CENTRALE HYDRAULIQUE CDE VANNE BY-PASS BP": {
+      "mean": 2.5,
+      "count": 2,
+      "std": 0.7071067811865476
+    },
+    "RAMONEUR N°28 D'EFFACEMENT TYPE IR": {
+      "mean": 2.5,
+      "count": 2,
+      "std": 0.7071067811865476
+    },
+    "TRANSFORMATEUR REDRESSEUR CHAMP1 FILE B": {
+      "mean": 2.5,
+      "count": 2,
+      "std": 0.7071067811865476
+    },
+    "T EAU ENTR CHAUF 7": {
+      "mean": 2.5,
+      "count": 2,
+      "std": 0.7071067811865476
+    },
+    "MOTEUR POMPE NORIA SECOURU": {
+      "mean": 2.5,
+      "count": 2,
+      "std": 0.7071067811865476
+    },
+    "LP 4 HEATER LEVEL": {
+      "mean": 2.5,
+      "count": 2,
+      "std": 0.7071067811865476
+    },
+    "POMPE DE SOULÈVEMENT (PALIER N°4)": {
+      "mean": 2.5,
+      "count": 2,
+      "std": 0.7071067811865476
+    },
+    "MOTEUR DE FRAPPAGE PLAQUES RECEPTRICES": {
+      "mean": 2.5,
+      "count": 2,
+      "std": 0.7071067811865476
+    },
+    "SAS A SOUS CHAMP 4 ELECTROFILTRE A": {
+      "mean": 2.5,
+      "count": 2,
+      "std": 0.7071067811865476
+    },
+    "CONTINOUS BLOWDOWN TANK RELIEF": {
+      "mean": 2.5,
+      "count": 2,
+      "std": 0.7071067811865476
+    },
+    "FILTRE AMONT LA POMPE DE DRAINAGE FIOUL COTÉ CHAUD": {
+      "mean": 2.5,
+      "count": 2,
+      "std": 0.7071067811865476
+    },
+    "Transmetteur de niveau RHP7.": {
+      "mean": 2.5,
+      "count": 2,
+      "std": 0.7071067811865476
+    },
+    "Capteur de Vibration Relative Palier MP Arrière +": {
+      "mean": 2.5,
+      "count": 2,
+      "std": 0.7071067811865476
+    },
+    "VANNE DE DECHARGE DES SAS   SOUS CHAMP 3 ELECTROFI": {
+      "mean": 2.4444444444444446,
+      "count": 9,
+      "std": 0.5270462766947299
+    },
+    "INDICATEUR DE TEMPERATURE": {
+      "mean": 2.411764705882353,
+      "count": 17,
+      "std": 0.6183469424008424
+    },
+    "ELAIRAGE ET PC BATIMENT ELECTRIQUE": {
+      "mean": 2.4,
+      "count": 5,
+      "std": 0.5477225575051661
+    },
+    "SECHEUR POUR COMPRESSEUR D'AIR C TYPE GGGGG": {
+      "mean": 2.4,
+      "count": 5,
+      "std": 0.5477225575051662
+    },
+    "Chaudière": {
+      "mean": 2.375,
+      "count": 8,
+      "std": 0.5175491695067655
+    },
+    "MANOMETRE": {
+      "mean": 2.3684210526315788,
+      "count": 19,
+      "std": 0.5972647203701474
+    },
+    "convoyeur vers camion machfer unité 03": {
+      "mean": 2.3333333333333335,
+      "count": 3,
+      "std": 0.5773502691896257
+    },
+    "Vanne Régulatrice de Refroidissement SO2": {
+      "mean": 2.3333333333333335,
+      "count": 3,
+      "std": 0.5773502691896257
+    },
+    "Instrumentations du décrasseur": {
+      "mean": 2.3333333333333335,
+      "count": 3,
+      "std": 0.5773502691896257
+    },
+    "MOTEUR POMPE D'EXTRACTION 1": {
+      "mean": 2.3333333333333335,
+      "count": 3,
+      "std": 0.5773502691896257
+    },
+    "COMPRESSEUR D'AIR B TYPE GGGGG": {
+      "mean": 2.3333333333333335,
+      "count": 3,
+      "std": 0.5773502691896258
+    },
+    "RÉCHAUFFEUR BASSE PRESSION N°1": {
+      "mean": 2.3333333333333335,
+      "count": 3,
+      "std": 1.1547005383792515
+    },
+    "SAS B SOUS CHAMP 3 ELECTROFILTRE B": {
+      "mean": 2.3333333333333335,
+      "count": 6,
+      "std": 0.5163977794943222
+    },
+    "Air heater": {
+      "mean": 2.3333333333333335,
+      "count": 3,
+      "std": 0.5773502691896258
+    },
+    "VENTILATION LOCALE ELECTRIQUE U3": {
+      "mean": 2.3333333333333335,
+      "count": 3,
+      "std": 1.1547005383792517
+    },
+    "VANNE DE REMPLISSAGE SAS B SOUS CHAMP 1 ELECTROFIL": {
+      "mean": 2.3333333333333335,
+      "count": 3,
+      "std": 0.5773502691896257
+    },
+    "Echangeur SHT": {
+      "mean": 2.3333333333333335,
+      "count": 3,
+      "std": 1.5275252316519465
+    },
+    "Indicateur de pression": {
+      "mean": 2.3333333333333335,
+      "count": 9,
+      "std": 0.49999999999999994
+    },
+    "TRASH RAKE MOTOR/MOTEUR DERGILLEUR": {
+      "mean": 2.3,
+      "count": 10,
+      "std": 0.48304589153964794
+    },
+    "COMPRESSEUR D'AIR A TYPE GGGGG": {
+      "mean": 2.3,
+      "count": 10,
+      "std": 0.674948557710553
+    },
+    "SECHEUR POUR COMPRESSEUR D'AIR A TYPE GGGGG": {
+      "mean": 2.25,
+      "count": 4,
+      "std": 0.5
+    },
+    "SERVOMOTEUR VANNE MOTORISÉE AU CIRCUIT DE SOUTIRAG": {
+      "mean": 2.25,
+      "count": 4,
+      "std": 0.5
+    },
+    "SECHEUR POUR COMPRESSEUR D'AIR A TYPE GA90W": {
+      "mean": 2.25,
+      "count": 4,
+      "std": 0.5
+    },
+    "VANNE TOR 1/4 TOUR SORTIE RECHAUFFEUR D'AIR": {
+      "mean": 2.25,
+      "count": 4,
+      "std": 0.5
+    },
+    "RÉCHAUFFEUR BASSE PRESSION N°4": {
+      "mean": 2.25,
+      "count": 8,
+      "std": 0.4629100498862757
+    },
+    "DEGRILLEUR N°1 /BAR SCREEN": {
+      "mean": 2.25,
+      "count": 4,
+      "std": 0.5
+    },
+    "DETECTEUR DE NIVEAU": {
+      "mean": 2.25,
+      "count": 4,
+      "std": 0.5
+    },
+    "DETENDEUR D'AIR": {
+      "mean": 2.25,
+      "count": 4,
+      "std": 0.5
+    },
+    "CONDENSEUR PRINCIPAL / MAIN CONDENSER": {
+      "mean": 2.25,
+      "count": 8,
+      "std": 0.4629100498862757
+    },
+    "Ventilateur de souflage A": {
+      "mean": 2.2,
+      "count": 5,
+      "std": 0.4472135954999579
+    },
+    "COMPRESSEUR D'AIR C TYPE GGGGGG": {
+      "mean": 2.2,
+      "count": 10,
+      "std": 0.421637021355784
+    },
+    "POMPE DE DRAINAGE FIOUL COTÉ CHAUDIÈRE": {
+      "mean": 2.2,
+      "count": 5,
+      "std": 0.4472135954999579
+    },
+    "RECHAUFFEUR D'AIR.": {
+      "mean": 2.2,
+      "count": 15,
+      "std": 0.6761234037828132
+    },
+    "VANNE DE REMPLISSAGE SAS A SOUS CHAMP 3 ELECTROFIL": {
+      "mean": 2.2,
+      "count": 5,
+      "std": 0.44721359549995787
+    },
+    "EQUIPMENT DE FILTRATION / SCREENING EQUIPMENT": {
+      "mean": 2.1666666666666665,
+      "count": 6,
+      "std": 0.408248290463863
+    },
+    "SOUPAPE D'ASPIRATION POMPE BOOSTER 30.": {
+      "mean": 2.1666666666666665,
+      "count": 6,
+      "std": 0.408248290463863
+    },
+    "Soutirage Aval N° 6": {
+      "mean": 2.142857142857143,
+      "count": 7,
+      "std": 0.3779644730092273
+    },
+    "FILTRE A AIR": {
+      "mean": 2.142857142857143,
+      "count": 7,
+      "std": 0.6900655593423541
+    },
+    "TRANSFORMATEUR REDRESSEUR CHAMP1 FILE A": {
+      "mean": 2.142857142857143,
+      "count": 7,
+      "std": 0.3779644730092273
+    },
+    "MOTEUR POMPE ALIMENTATION FUEL": {
+      "mean": 2.142857142857143,
+      "count": 7,
+      "std": 0.3779644730092273
+    },
+    "PUMP STRAINER": {
+      "mean": 2.142857142857143,
+      "count": 7,
+      "std": 0.37796447300922725
+    },
+    "Pompe eau de lavage du tambour 10": {
+      "mean": 2.1363636363636362,
+      "count": 44,
+      "std": 0.3471417571787742
+    },
+    "broyeur D": {
+      "mean": 2.111111111111111,
+      "count": 9,
+      "std": 0.3333333333333333
+    },
+    "COAL FEEDER C": {
+      "mean": 2.111111111111111,
+      "count": 9,
+      "std": 0.6009252125773316
+    },
+    "VANNE D'ISOLEMENT APPOINT NORMAL CONDENSEUR": {
+      "mean": 2.1,
+      "count": 10,
+      "std": 0.316227766016838
+    },
+    "FILTRE DOUBLE": {
+      "mean": 2.090909090909091,
+      "count": 11,
+      "std": 0.5393598899705937
+    },
+    "SAS A SOUS CHAMP 4 ELECTROFILTRE B": {
+      "mean": 2.090909090909091,
+      "count": 11,
+      "std": 0.30151134457776374
+    },
+    "SAS A SOUS CHAMP 1 ELECTROFILTRE A": {
+      "mean": 2.0833333333333335,
+      "count": 36,
+      "std": 0.280305955290694
+    },
+    "VANNE DE DECHARGE DES SAS   SOUS CHAMP 1 ELECTROFI": {
+      "mean": 2.076923076923077,
+      "count": 13,
+      "std": 0.2773500981126145
+    },
+    "COMPRESSEUR D'AIR C TYPE GA90W": {
+      "mean": 2.076923076923077,
+      "count": 13,
+      "std": 0.2773500981126145
+    },
+    "RÉCHAUFFEUR FIOUL N°10": {
+      "mean": 2.076923076923077,
+      "count": 13,
+      "std": 0.2773500981126145
+    },
+    "VANNE DE DECHARGE DES SAS   SOUS CHAMP 2 ELECTROFI": {
+      "mean": 2.0714285714285716,
+      "count": 14,
+      "std": 0.26726124191242434
+    },
+    "SAS A SOUS CHAMP 2 ELECTROFILTRE B": {
+      "mean": 2.0714285714285716,
+      "count": 14,
+      "std": 0.2672612419124245
+    },
+    "ECLERAGE DE CHAUDIERE U03 LP": {
+      "mean": 2.066666666666667,
+      "count": 15,
+      "std": 0.45773770821706344
+    },
+    "SAS A SOUS CHAMP 1 ELECTROFILTRE B": {
+      "mean": 2.0625,
+      "count": 32,
+      "std": 0.24593468841898236
+    },
+    "SAS A SOUS CHAMP 5 ELECTROFILTRE B": {
+      "mean": 2.0588235294117645,
+      "count": 17,
+      "std": 0.24253562503633297
+    },
+    "POMPE FUEL  PRINCIPALE  N°2": {
+      "mean": 2.05,
+      "count": 60,
+      "std": 0.4666868437930209
+    },
+    "POMPE FUEL  PRINCIPALE  N°1": {
+      "mean": 2.0232558139534884,
+      "count": 86,
+      "std": 0.4051650117304135
+    },
+    "Vannes de la Sas Refus broyeur B": {
+      "mean": 2.0,
+      "count": 4,
+      "std": 0.0
+    },
+    "Armoire de Contrôle de Surpresseurs": {
+      "mean": 2.0,
+      "count": 3,
+      "std": 0.0
+    },
+    "Armoire de Contrôle Automate Node 34": {
+      "mean": 2.0,
+      "count": 4,
+      "std": 0.0
+    },
+    "RÉDUCTEUR DE VITESSE": {
+      "mean": 2.0,
+      "count": 3,
+      "std": 0.0
+    },
+    "ligne eau alimentaire 30": {
+      "mean": 2.0,
+      "count": 4,
+      "std": 0.816496580927726
+    },
+    "ligne eau alimentaire 10": {
+      "mean": 2.0,
+      "count": 10,
+      "std": 0.0
+    },
+    "Vanne isolement CP Broyeur A / foyer  angle 1": {
+      "mean": 2.0,
+      "count": 2,
+      "std": 0.0
+    },
+    "Tube de pitaux N°2 aspiration ventillateur B\".\"": {
+      "mean": 2.0,
+      "count": 6,
+      "std": 0.0
+    },
+    "Ttransmetteur de pression foyer ..": {
+      "mean": 2.0,
+      "count": 5,
+      "std": 0.0
+    },
+    "Transmetteur différentiel d'air primaire chaud/foyer": {
+      "mean": 2.0,
+      "count": 8,
+      "std": 0.5345224838248488
+    },
+    "Transmetteur de la Mesure de  Pression Différentielle Boit Vent / Foyer": {
+      "mean": 2.0,
+      "count": 12,
+      "std": 0.0
+    },
+    "Transmetteur de débit air de soufflage ventilateur A\" N°1.\"": {
+      "mean": 2.0,
+      "count": 4,
+      "std": 0.0
+    },
+    "COMMANDE DES INCLINAISON BRÛLEURS COIN 2.": {
+      "mean": 2.0,
+      "count": 5,
+      "std": 0.0
+    },
+    "Compartiment / péniche bruleurs angle 2": {
+      "mean": 2.0,
+      "count": 2,
+      "std": 0.0
+    },
+    "Combustion air supply system U3": {
+      "mean": 2.0,
+      "count": 6,
+      "std": 0.6324555320336759
+    },
+    "Clapet Hydraulique Refoulement Pompe Eau de Mer 20": {
+      "mean": 2.0,
+      "count": 5,
+      "std": 0.0
+    },
+    "Clapet Hydraulique Refoulement Pompe Eau de Mer 10": {
+      "mean": 2.0,
+      "count": 3,
+      "std": 0.0
+    },
+    "Capteur de vibration radiale coté Moteur  de la pompe 10": {
+      "mean": 2.0,
+      "count": 5,
+      "std": 0.0
+    },
+    "CWP20 FILTRE DP": {
+      "mean": 2.0,
+      "count": 2,
+      "std": 0.0
+    },
+    "CORNER 4 EL .BC FUEL OIL TRIP": {
+      "mean": 2.0,
+      "count": 2,
+      "std": 0.0
+    },
+    "Armoire de Contrôle Automate Node 33": {
+      "mean": 2.0,
+      "count": 4,
+      "std": 0.0
+    },
+    "Armoire de Contrôle Automate Node 30": {
+      "mean": 2.0,
+      "count": 2,
+      "std": 0.0
+    },
+    "ARMOIRE DE CONTRÔLE DU GROUPE ELECTROGENE": {
+      "mean": 2.0,
+      "count": 5,
+      "std": 0.0
+    },
+    "CONVOYEUR DE NETTOYAGE  ALIMENTATEUR A": {
+      "mean": 2.0,
+      "count": 3,
+      "std": 0.0
+    },
+    "CONVOYEUR CENDRE VOLANTE TREMIE ECONOMISEUR": {
+      "mean": 2.0,
+      "count": 43,
+      "std": 0.21821789023599233
+    },
+    "FURANCE OUTLET GAS TEMP": {
+      "mean": 2.0,
+      "count": 4,
+      "std": 0.0
+    },
+    "FILTRE/REFRIGERANT POMPE DE CIRCULATION": {
+      "mean": 2.0,
+      "count": 4,
+      "std": 0.0
+    },
+    "FILTRE DUPLEX": {
+      "mean": 2.0,
+      "count": 2,
+      "std": 0.0
+    },
+    "DEBB APP EAU AU COND": {
+      "mean": 2.0,
+      "count": 2,
+      "std": 0.0
+    },
+    "Contacteur de niveau très haut RHP 6.": {
+      "mean": 2.0,
+      "count": 2,
+      "std": 0.0
+    },
+    "Conditionnement circuit de ramonage": {
+      "mean": 2.0,
+      "count": 6,
+      "std": 0.0
+    },
+    "VANNE D'ARRET BYPASS": {
+      "mean": 2.0,
+      "count": 2,
+      "std": 0.0
+    },
+    "VANNE D'APPOINT BÂCHE TAMPON.": {
+      "mean": 2.0,
+      "count": 3,
+      "std": 0.0
+    },
+    "V/R NIVEAU NORMAL BA": {
+      "mean": 2.0,
+      "count": 11,
+      "std": 0.4472135954999579
+    },
+    "Transmetteur de Niveau Trémies Charbon du Broyeur A": {
+      "mean": 2.0,
+      "count": 2,
+      "std": 0.0
+    },
+    "Electrofiltre B champs 2": {
+      "mean": 2.0,
+      "count": 3,
+      "std": 0.0
+    },
+    "Electrofiltre B champs 1": {
+      "mean": 2.0,
+      "count": 9,
+      "std": 0.0
+    },
+    "Electrofiltre A champs 2": {
+      "mean": 2.0,
+      "count": 2,
+      "std": 0.0
+    },
+    "ELAIRAGE ET PC ELECTROFILTRE": {
+      "mean": 2.0,
+      "count": 2,
+      "std": 0.0
+    },
+    "EJECTEUR DE SERVICE 1": {
+      "mean": 2.0,
+      "count": 2,
+      "std": 0.0
+    },
+    "ECONOMISEUR U3": {
+      "mean": 2.0,
+      "count": 9,
+      "std": 0.0
+    },
+    "CONVOYEUR DE NETTOYAGE  ALIMENTATEUR C": {
+      "mean": 2.0,
+      "count": 4,
+      "std": 0.0
+    },
+    "Désurchauffe du Contour By-pass HP": {
+      "mean": 2.0,
+      "count": 2,
+      "std": 0.0
+    },
+    "DISJONCTEUR MT": {
+      "mean": 2.0,
+      "count": 2,
+      "std": 0.0
+    },
+    "DIFF EXPANSION LPT": {
+      "mean": 2.0,
+      "count": 2,
+      "std": 0.0
+    },
+    "DIF P ECH10 CCCW": {
+      "mean": 2.0,
+      "count": 2,
+      "std": 0.0
+    },
+    "VANNE DE PURGE": {
+      "mean": 2.0,
+      "count": 4,
+      "std": 0.0
+    },
+    "VANNE DE DECHARGE DES SAS   SOUS CHAMP 5 ELECTROFI": {
+      "mean": 2.0,
+      "count": 2,
+      "std": 0.0
+    },
+    "VANNE DE DECHARGE DES SAS   SOUS CHAMP 4 ELECTROFI": {
+      "mean": 2.0,
+      "count": 2,
+      "std": 0.0
+    },
+    "Tableau distribution 220 AC UPS -U3": {
+      "mean": 2.0,
+      "count": 4,
+      "std": 0.0
+    },
+    "TUBE DE PITOT DE MESURE DE DEBIT AIR SECONDAIRE B": {
+      "mean": 2.0,
+      "count": 2,
+      "std": 0.0
+    },
+    "FILTRE AMONT POMPE D'ALIMENTATION FIOUL FIOUL N°20": {
+      "mean": 2.0,
+      "count": 2,
+      "std": 0.0
+    },
+    "FILTRE AMONT POMPE D'ALIMENTATION FIOUL FIOUL N°10": {
+      "mean": 2.0,
+      "count": 6,
+      "std": 0.0
+    },
+    "FD FAN A AIR FLOW": {
+      "mean": 2.0,
+      "count": 6,
+      "std": 0.0
+    },
+    "Electrofiltre B champs 6": {
+      "mean": 2.0,
+      "count": 2,
+      "std": 0.0
+    },
+    "Electrofiltre B champs 3": {
+      "mean": 2.0,
+      "count": 2,
+      "std": 0.0
+    },
+    "Isolement vapeur d'inertage du broyeur A": {
+      "mean": 2.0,
+      "count": 2,
+      "std": 0.0
+    },
+    "Isolation Désurchauffe du Contour By-pass HP": {
+      "mean": 2.0,
+      "count": 5,
+      "std": 0.0
+    },
+    "Indicateur de Pression CO2 Alimentation Alternateur": {
+      "mean": 2.0,
+      "count": 2,
+      "std": 0.0
+    },
+    "Indicateur de Débit Fioul Angle 3 Plan CD": {
+      "mean": 2.0,
+      "count": 2,
+      "std": 1.4142135623730951
+    },
+    "Indicateur  de niveau d'huile Station Hydraulique  du Broyeur D": {
+      "mean": 2.0,
+      "count": 2,
+      "std": 0.0
+    },
+    "INJECTEUR SO3 4A": {
+      "mean": 2.0,
+      "count": 3,
+      "std": 0.0
+    },
+    "Transmetteur de Niveau du Réservoir de Soufre Liquide": {
+      "mean": 2.0,
+      "count": 2,
+      "std": 0.0
+    },
+    "Ligne  air primaire 20": {
+      "mean": 2.0,
+      "count": 2,
+      "std": 0.0
+    },
+    "MOTEUR POMPE PRODUCTION HYPOCHLORITE 10": {
+      "mean": 2.0,
+      "count": 2,
+      "std": 0.0
+    },
+    "MOTEUR POMPE DE LUBRIFICATION BROYEUR D": {
+      "mean": 2.0,
+      "count": 2,
+      "std": 0.0
+    },
+    "INJECTEUR SO3 3A": {
+      "mean": 2.0,
+      "count": 3,
+      "std": 0.0
+    },
+    "INJECTEUR SO3 1A": {
+      "mean": 2.0,
+      "count": 4,
+      "std": 0.0
+    },
+    "HUMIDIFICATEUR AIR POUR BAGUES": {
+      "mean": 2.0,
+      "count": 2,
+      "std": 0.0
+    },
+    "HP HTRS BYP-SERV PILOT VLV": {
+      "mean": 2.0,
+      "count": 3,
+      "std": 0.0
+    },
+    "GROUPES ELECTROGENES U3": {
+      "mean": 2.0,
+      "count": 2,
+      "std": 0.0
+    },
+    "Transmetteur de Débit Massique du Soufre Entrée Bruleur": {
+      "mean": 2.0,
+      "count": 4,
+      "std": 0.816496580927726
+    },
+    "Transmetteur de Delta Pression Cuve Broyeur A": {
+      "mean": 2.0,
+      "count": 2,
+      "std": 0.0
+    },
+    "Transmetteur 1 de débit  pompe alimentaire 30": {
+      "mean": 2.0,
+      "count": 3,
+      "std": 0.0
+    },
+    "Thermocouple  de Température  de la Vapeur de Traçage": {
+      "mean": 2.0,
+      "count": 2,
+      "std": 0.0
+    },
+    "Température Gaz Sortie Réchauffeur d'air": {
+      "mean": 2.0,
+      "count": 5,
+      "std": 0.0
+    },
+    "Température Gaz Entrée  Réchauffeur d'air": {
+      "mean": 2.0,
+      "count": 8,
+      "std": 0.0
+    },
+    "Tableaux Electriques": {
+      "mean": 2.0,
+      "count": 2,
+      "std": 0.0
+    },
+    "TRANSFORMATEUR REDRESSEUR CHAMP4 FILE A": {
+      "mean": 2.0,
+      "count": 8,
+      "std": 0.0
+    },
+    "TRANSFORMATEUR REDRESSEUR CHAMP3 FILE A": {
+      "mean": 2.0,
+      "count": 5,
+      "std": 0.0
+    },
+    "TRANSFORMATEUR REDRESSEUR CHAMP2 FILE B": {
+      "mean": 2.0,
+      "count": 4,
+      "std": 0.0
+    },
+    "TRANSFO DE SOUTIRAGE": {
+      "mean": 2.0,
+      "count": 3,
+      "std": 0.0
+    },
+    "THERMOCOUPLE DOUBLE": {
+      "mean": 2.0,
+      "count": 4,
+      "std": 0.0
+    },
+    "TEMP SOUTIR3TURB": {
+      "mean": 2.0,
+      "count": 2,
+      "std": 0.0
+    },
+    "T PLR APPUI-GUID HUI GRAIS RECHAUF AIR PRIM": {
+      "mean": 2.0,
+      "count": 4,
+      "std": 0.0
+    },
+    "TRANSFORMATEUR REDRESSEUR CHAMP6 FILE A": {
+      "mean": 2.0,
+      "count": 7,
+      "std": 0.0
+    },
+    "TRANSFORMATEUR REDRESSEUR CHAMP5 FILE B": {
+      "mean": 2.0,
+      "count": 2,
+      "std": 0.0
+    },
+    "MOTEUR BROYEUR C": {
+      "mean": 2.0,
+      "count": 11,
+      "std": 0.0
+    },
+    "MOTEUR BROYEUR A": {
+      "mean": 2.0,
+      "count": 10,
+      "std": 0.0
+    },
+    "MOTEUR ALIMENTATEUR GRAVIMETRIQUE": {
+      "mean": 2.0,
+      "count": 8,
+      "std": 0.0
+    },
+    "MANOMETRE PRESSION RESERVOIR INTEMEDIAIRE": {
+      "mean": 2.0,
+      "count": 2,
+      "std": 0.0
+    },
+    "MANOMETRE DE PRESSION (REMPLI DE GLYCERINE) STATIO": {
+      "mean": 2.0,
+      "count": 2,
+      "std": 0.0
+    },
+    "Ligne de frappage ER Electrofiltre A Champs 1": {
+      "mean": 2.0,
+      "count": 3,
+      "std": 0.0
+    },
+    "Mesure de Température Encoche  013  Alternateur": {
+      "mean": 2.0,
+      "count": 2,
+      "std": 0.0
+    },
+    "Mesure de Température Conduite Charbon 2 Broyeur C": {
+      "mean": 2.0,
+      "count": 2,
+      "std": 0.0
+    },
+    "Mesure de Température  Palier  Butée Externe de  PA30": {
+      "mean": 2.0,
+      "count": 2,
+      "std": 0.0
+    },
+    "Mesure de  Vibration Axiale Coté Libre  du  Ventilateur d'Air Secondaire A": {
+      "mean": 2.0,
+      "count": 2,
+      "std": 0.0
+    },
+    "MOTEUR VENTILATEUR DE REFROIDISSEMENT": {
+      "mean": 2.0,
+      "count": 2,
+      "std": 0.0
+    },
+    "MOTEUR VENTILATEUR AIR PRIMAIRE B": {
+      "mean": 2.0,
+      "count": 2,
+      "std": 0.0
+    },
+    "MOTEUR RAMONEUR N°21 D'EFFACEMENT TYPE IR": {
+      "mean": 2.0,
+      "count": 2,
+      "std": 0.0
+    },
+    "MOTEUR RAMONEUR LONG RETRACTABLE N°14 TYPE IKPOUR": {
+      "mean": 2.0,
+      "count": 3,
+      "std": 0.0
+    },
+    "POMPE A VIDE 1": {
+      "mean": 2.0,
+      "count": 13,
+      "std": 0.0
+    },
+    "P,H2 SUPP GAS UNIT": {
+      "mean": 2.0,
+      "count": 2,
+      "std": 0.0
+    },
+    "OPACIMETRE": {
+      "mean": 2.0,
+      "count": 6,
+      "std": 0.0
+    },
+    "MOTEUR POMPE A VIDE CONDENSEUR": {
+      "mean": 2.0,
+      "count": 2,
+      "std": 0.0
+    },
+    "MOTEUR NETTOYAGE CONVOYEUR ALIMENTATEUR C": {
+      "mean": 2.0,
+      "count": 2,
+      "std": 0.0
+    },
+    "MOTEUR DE FRAPPAGE PLAQUE EMESSIVE CHAMP 3 FILE B": {
+      "mean": 2.0,
+      "count": 2,
+      "std": 0.0
+    },
+    "MOTEUR DE FRAPPAGE PLAQUE EMESSIVE CHAMP 2 FILE A": {
+      "mean": 2.0,
+      "count": 3,
+      "std": 0.0
+    },
+    "TRANSFORMATEUR REDRESSEUR CHAMP5 FILE A": {
+      "mean": 2.0,
+      "count": 13,
+      "std": 0.0
+    },
+    "Mesure de Température Sortie Broyeur A": {
+      "mean": 2.0,
+      "count": 4,
+      "std": 0.0
+    },
+    "Mesure de Température Palier 1  Moteur du Ventilateur de Tirage  A": {
+      "mean": 2.0,
+      "count": 2,
+      "std": 0.0
+    },
+    "Système de Supervision et Commande Unité 3": {
+      "mean": 2.0,
+      "count": 3,
+      "std": 0.0
+    },
+    "Systeme de ventilateurs d'air de tirage U3": {
+      "mean": 2.0,
+      "count": 4,
+      "std": 0.0
+    },
+    "Soutirage N° 4": {
+      "mean": 2.0,
+      "count": 2,
+      "std": 0.0
+    },
+    "Soutirage Aval N° 5": {
+      "mean": 2.0,
+      "count": 3,
+      "std": 0.0
+    },
+    "Soutirage Amont N° 6": {
+      "mean": 2.0,
+      "count": 3,
+      "std": 0.0
+    },
+    "Soupape Ballon": {
+      "mean": 2.0,
+      "count": 2,
+      "std": 0.0
+    },
+    "Servomoteurs d'air secondaire unité 3": {
+      "mean": 2.0,
+      "count": 2,
+      "std": 0.0
+    },
+    "SYSTEME D'INJECTION SO3": {
+      "mean": 2.0,
+      "count": 12,
+      "std": 0.0
+    },
+    "Systéme SO3": {
+      "mean": 2.0,
+      "count": 59,
+      "std": 0.32163376045133846
+    },
+    "Mesure de Température Enroulement 5 Moteur du Ventilateur de Tirage  A": {
+      "mean": 2.0,
+      "count": 2,
+      "std": 0.0
+    },
+    "Mesure de Température Enroulement 2 Moteur de la Pompe d'Extraction 10": {
+      "mean": 2.0,
+      "count": 4,
+      "std": 0.0
+    },
+    "Mesure de Température Enroulement ( W ) du Moteur de la Pompe Eau de Mer 10": {
+      "mean": 2.0,
+      "count": 2,
+      "std": 0.0
+    },
+    "Mesure de Température Encoche  018  Alternateur": {
+      "mean": 2.0,
+      "count": 2,
+      "std": 0.0
+    },
+    "POMPE D'HUILE DE COMMANDE DES VANNES D'A": {
+      "mean": 2.0,
+      "count": 3,
+      "std": 0.0
+    },
+    "POMPE D'APPOINT  (EAU DÉMINÉRALISÉE)": {
+      "mean": 2.0,
+      "count": 15,
+      "std": 0.37796447300922725
+    },
+    "POMPE D'ALIMENTATION FIOUL FIOUL N°10": {
+      "mean": 2.0,
+      "count": 2,
+      "std": 0.0
+    },
+    "POMPE A VIDE 2": {
+      "mean": 2.0,
+      "count": 6,
+      "std": 0.0
+    },
+    "PULVERIZER B3 DISCHARGE": {
+      "mean": 2.0,
+      "count": 13,
+      "std": 0.0
+    },
+    "PULVERIZER B2 DISCHARGE": {
+      "mean": 2.0,
+      "count": 4,
+      "std": 0.0
+    },
+    "PULVERIZER A4 DISCHARGE": {
+      "mean": 2.0,
+      "count": 3,
+      "std": 0.0
+    },
+    "PULVERIZER A3 DISCHARGE": {
+      "mean": 2.0,
+      "count": 2,
+      "std": 0.0
+    },
+    "PULV C LUBE OIL HEATER": {
+      "mean": 2.0,
+      "count": 5,
+      "std": 0.0
+    },
+    "PULV B STM INERTING CTRL VALVE ASSY": {
+      "mean": 2.0,
+      "count": 2,
+      "std": 0.0
+    },
+    "PULV A CORNER 3 COAL SHUT-OFF GATE": {
+      "mean": 2.0,
+      "count": 2,
+      "std": 0.0
+    },
+    "Niveau huile cuve coupleur N°30": {
+      "mean": 2.0,
+      "count": 2,
+      "std": 0.0
+    },
+    "Moteur pompe eau de mer 10": {
+      "mean": 2.0,
+      "count": 9,
+      "std": 0.0
+    },
+    "Moteur pompe alimentaire 20": {
+      "mean": 2.0,
+      "count": 3,
+      "std": 0.0
+    },
+    "Moteur de souflage B": {
+      "mean": 2.0,
+      "count": 3,
+      "std": 0.0
+    },
+    "Mill air system, carrier air system U3": {
+      "mean": 2.0,
+      "count": 2,
+      "std": 0.0
+    },
+    "CENTRIFUGEUSE D'HUILE": {
+      "mean": 2.0,
+      "count": 9,
+      "std": 0.0
+    },
+    "CENTRIFUGEUSE / OIL SEPARATOR": {
+      "mean": 2.0,
+      "count": 4,
+      "std": 0.0
+    },
+    "CENTRALE HYDRAULIQUE HP.": {
+      "mean": 2.0,
+      "count": 2,
+      "std": 0.0
+    },
+    "CENTRALE HYDRAULIQUE DE LUBRIFICATION PALIER SUPPO": {
+      "mean": 2.0,
+      "count": 2,
+      "std": 0.0
+    },
+    "VANNE ELECTROMAGNETIQUE DRAINAGE": {
+      "mean": 2.0,
+      "count": 3,
+      "std": 0.0
+    },
+    "VANNE DE RÉGULATION ARRIVÉE PRICIPALE DE": {
+      "mean": 2.0,
+      "count": 2,
+      "std": 0.0
+    },
+    "VANNE DE REMPLISSAGE SAS B SOUS CHAMP 4 ELECTROFIL": {
+      "mean": 2.0,
+      "count": 2,
+      "std": 0.0
+    },
+    "Pompe nouriciere (booster)  N°10": {
+      "mean": 2.0,
+      "count": 7,
+      "std": 0.5773502691896257
+    },
+    "Vanne isolement CP Broyeur B / foyer angle 3": {
+      "mean": 2.0,
+      "count": 3,
+      "std": 0.0
+    },
+    "Pompe Eau de Mer 20": {
+      "mean": 2.0,
+      "count": 18,
+      "std": 0.5940885257860046
+    },
+    "PURGEUR RESERVOIR INTEMEDIAIRE": {
+      "mean": 2.0,
+      "count": 7,
+      "std": 0.0
+    },
+    "Vanne isolement CP Broyeur B / foyer  angle 2": {
+      "mean": 2.0,
+      "count": 2,
+      "std": 0.0
+    },
+    "Vanne isolement CP Broyeur A / foyer angle 3": {
+      "mean": 2.0,
+      "count": 2,
+      "std": 0.0
+    },
+    "Vanne isolement CP Broyeur A / foyer angle 2": {
+      "mean": 2.0,
+      "count": 4,
+      "std": 0.0
+    },
+    "POMPE DE GRAISSAGE POMPE ALIMENTAIRE": {
+      "mean": 2.0,
+      "count": 2,
+      "std": 0.0
+    },
+    "Vanne isolement CP Broyeur A / foyer  angle 4": {
+      "mean": 2.0,
+      "count": 6,
+      "std": 0.0
+    },
+    "SECHEUR POUR COMPRESSEUR D'AIR C TYPE GA90W": {
+      "mean": 2.0,
+      "count": 4,
+      "std": 0.0
+    },
+    "PRS RESUR APR REFRIG": {
+      "mean": 2.0,
+      "count": 2,
+      "std": 0.0
+    },
+    "PRESSOSTAT": {
+      "mean": 2.0,
+      "count": 3,
+      "std": 0.0
+    },
+    "POMPE HYDROLIQUE BY-PASS LP  2": {
+      "mean": 2.0,
+      "count": 13,
+      "std": 0.40824829046386313
+    },
+    "SYS EAU DE CIRCUL": {
+      "mean": 2.0,
+      "count": 6,
+      "std": 0.0
+    },
+    "STM DRUM WATER LEVEL": {
+      "mean": 2.0,
+      "count": 2,
+      "std": 0.0
+    },
+    "STATION HYDROLIQUE": {
+      "mean": 2.0,
+      "count": 2,
+      "std": 0.0
+    },
+    "SSC LOW LEVEL SW/NIV DECRASSEUR BAS": {
+      "mean": 2.0,
+      "count": 2,
+      "std": 0.0
+    },
+    "SOUPAPE DE RAMONEUR LONG RETRACTABLE N°31 TYPE IK": {
+      "mean": 2.0,
+      "count": 3,
+      "std": 0.0
+    },
+    "SOUPAPE DE RAMONEUR LONG RETRACTABLE N°13 TYPE IK": {
+      "mean": 2.0,
+      "count": 2,
+      "std": 0.0
+    },
+    "CBT LEVEL CONTROL": {
+      "mean": 2.0,
+      "count": 2,
+      "std": 0.0
+    },
+    "COMPRESSEUR D'AIR B TYPE GGGGGG": {
+      "mean": 2.0,
+      "count": 10,
+      "std": 0.0
+    },
+    "COMPRESSEUR D'AIR A TYPE GGGGGG": {
+      "mean": 2.0,
+      "count": 4,
+      "std": 0.0
+    },
+    "COAL FEEDER A": {
+      "mean": 2.0,
+      "count": 13,
+      "std": 0.5773502691896257
+    },
+    "COAL BUNKER A": {
+      "mean": 2.0,
+      "count": 2,
+      "std": 0.0
+    },
+    "CLAPET AU REFOULEMENT POMPE HYPOCHLORITE": {
+      "mean": 2.0,
+      "count": 3,
+      "std": 0.0
+    },
+    "Position écope de la pompe alimentaire 20": {
+      "mean": 2.0,
+      "count": 2,
+      "std": 0.0
+    },
+    "RAMONEUR N°26 D'EFFACEMENT TYPE IR": {
+      "mean": 2.0,
+      "count": 3,
+      "std": 0.0
+    },
+    "RAMONEUR N°23 D'EFFACEMENT TYPE IR": {
+      "mean": 2.0,
+      "count": 3,
+      "std": 0.0
+    },
+    "RAMONEUR LONG RETRACTABLE N°9 TYPE IK POUR LES ÉCH": {
+      "mean": 2.0,
+      "count": 4,
+      "std": 0.0
+    },
+    "PULVERIZER D2 DISCHARGE": {
+      "mean": 2.0,
+      "count": 4,
+      "std": 0.0
+    },
+    "PULVERIZER C3 DISCHARGE": {
+      "mean": 2.0,
+      "count": 4,
+      "std": 0.0
+    },
+    "PULVERIZER C2 DISCHARGE": {
+      "mean": 2.0,
+      "count": 3,
+      "std": 0.0
+    },
+    "Vanne Déssuchauffe Pompe Alimentaire N°20": {
+      "mean": 2.0,
+      "count": 2,
+      "std": 0.0
+    },
+    "SOOTBLOWER REMOTE I/O PANEL": {
+      "mean": 2.0,
+      "count": 2,
+      "std": 0.0
+    },
+    "SERVOMOTEUR VANNE DE PURGE VAPEUR": {
+      "mean": 2.0,
+      "count": 2,
+      "std": 0.0
+    },
+    "SERVOMOTEUR VANNE D'ISOLATION DE REFROIDISSEMENT H": {
+      "mean": 2.0,
+      "count": 2,
+      "std": 0.0
+    },
+    "SERVOMOTEUR PNEUMATIQUE DU REGISTRE DE DECHARGE BR": {
+      "mean": 2.0,
+      "count": 3,
+      "std": 1.0
+    },
+    "SERVOMOTEUR DE LA VANNE TOR AMONT BRULEUR FIOUL CO": {
+      "mean": 2.0,
+      "count": 2,
+      "std": 0.0
+    },
+    "SERVOMOTEUR DE LA VANNE DE DECHARGE DES SAS   SOUS": {
+      "mean": 2.0,
+      "count": 7,
+      "std": 0.5773502691896257
+    },
+    "SERVOMOTEUR DE LA VANNE AU REFOULEMENT DE LA POMPE": {
+      "mean": 2.0,
+      "count": 2,
+      "std": 0.0
+    },
+    "SERVOMOTEUR DE LA VANNE  DE REMPLISSAGE SAS A SOUS": {
+      "mean": 2.0,
+      "count": 6,
+      "std": 0.0
+    },
+    "REGISTRE D'AIR COIN 4 PLAN  OFA1": {
+      "mean": 2.0,
+      "count": 2,
+      "std": 0.0
+    },
+    "REGISTRE D'AIR COIN 3 PLAN AB": {
+      "mean": 2.0,
+      "count": 2,
+      "std": 0.0
+    },
+    "REGISTRE D'AIR COIN 2 PLAN CD": {
+      "mean": 2.0,
+      "count": 3,
+      "std": 0.0
+    },
+    "REGISTRE D'AIR COIN 2 PLAN B": {
+      "mean": 2.0,
+      "count": 3,
+      "std": 0.0
+    },
+    "REGISTRE D'AIR COIN 1 PLAN  OFA2": {
+      "mean": 2.0,
+      "count": 2,
+      "std": 0.0
+    },
+    "SECHEUR POUR COMPRESSEUR D'AIR B TYPE GA90W": {
+      "mean": 2.0,
+      "count": 2,
+      "std": 1.4142135623730951
+    },
+    "RAMONEUR LONG RETRACTABLE  IK12": {
+      "mean": 2.0,
+      "count": 3,
+      "std": 0.0
+    },
+    "RAMONEUR DE RÉCHAUFFEUR D'AIR": {
+      "mean": 2.0,
+      "count": 11,
+      "std": 0.0
+    },
+    "R.H.SPRAY WATER  BLOCK": {
+      "mean": 2.0,
+      "count": 5,
+      "std": 0.0
+    },
+    "Purgeur de conduite conditionnement VS": {
+      "mean": 2.0,
+      "count": 3,
+      "std": 0.0
+    },
+    "Purge secours BP 4": {
+      "mean": 2.0,
+      "count": 2,
+      "std": 0.0
+    },
+    "Purge secours BP 3": {
+      "mean": 2.0,
+      "count": 2,
+      "std": 0.0
+    },
+    "Purge normale HP 7": {
+      "mean": 2.0,
+      "count": 8,
+      "std": 0.0
+    },
+    "Purge normale BP 2": {
+      "mean": 2.0,
+      "count": 2,
+      "std": 0.0
+    },
+    "Purge de conduite conditionnement VS": {
+      "mean": 2.0,
+      "count": 4,
+      "std": 0.0
+    },
+    "Purge Motorisè  Façade avant cha": {
+      "mean": 2.0,
+      "count": 2,
+      "std": 0.0
+    },
+    "RÉCHAUFFEUR FIOUL N°20": {
+      "mean": 2.0,
+      "count": 8,
+      "std": 0.0
+    },
+    "RESERVOIR INTEMEDIAIRE 5M3": {
+      "mean": 2.0,
+      "count": 2,
+      "std": 0.0
+    },
+    "Registre au refoulement  ventilateur  de tirage  B": {
+      "mean": 2.0,
+      "count": 2,
+      "std": 0.0
+    },
+    "Rectifiers, battery charger": {
+      "mean": 2.0,
+      "count": 2,
+      "std": 1.4142135623730951
+    },
+    "RESISTANCE TREMIE CHAMP 5 FILE A": {
+      "mean": 2.0,
+      "count": 2,
+      "std": 0.0
+    },
+    "RAMONEUR LONG RETRACTABLE N°6 TYPE IK POUR LES ÉCH": {
+      "mean": 2.0,
+      "count": 4,
+      "std": 0.0
+    },
+    "RAMONEUR LONG RETRACTABLE N°34 TYPE IK POUR LES ÉC": {
+      "mean": 2.0,
+      "count": 2,
+      "std": 0.0
+    },
+    "RAMONEUR LONG RETRACTABLE N°18 TYPE IK POUR LES ÉC": {
+      "mean": 2.0,
+      "count": 2,
+      "std": 0.0
+    },
+    "RAMONEUR LONG RETRACTABLE N°15 TYPE IK POUR LES ÉC": {
+      "mean": 2.0,
+      "count": 2,
+      "std": 0.0
+    },
+    "RAMONEUR LONG RETRACTABLE N°12 TYPE IK POUR LES ÉC": {
+      "mean": 2.0,
+      "count": 2,
+      "std": 0.0
+    },
+    "RAMONEUR LONG RETRACTABLE  IK29": {
+      "mean": 2.0,
+      "count": 2,
+      "std": 0.0
+    },
+    "RAMONEUR LONG RETRACTABLE  IK27": {
+      "mean": 2.0,
+      "count": 2,
+      "std": 0.0
+    },
+    "RAMONEUR LONG RETRACTABLE  IK23": {
+      "mean": 2.0,
+      "count": 7,
+      "std": 0.0
+    },
+    "RAMONEUR LONG RETRACTABLE  IK17": {
+      "mean": 2.0,
+      "count": 4,
+      "std": 0.0
+    },
+    "RAMONEUR LONG RETRACTABLE  IK15": {
+      "mean": 2.0,
+      "count": 2,
+      "std": 0.0
+    },
+    "RAMONEUR LONG RETRACTABLE  IK14": {
+      "mean": 2.0,
+      "count": 6,
+      "std": 0.0
+    },
+    "CAPTEUR DE VIBRATION RELATIVE PALIER MP ARRIERE+": {
+      "mean": 2.0,
+      "count": 2,
+      "std": 0.0
+    },
+    "CAMERA N°1 DE SURVEILLANCE FOYER": {
+      "mean": 2.0,
+      "count": 3,
+      "std": 0.0
+    },
+    "Barrillet vapeur auxiliaire": {
+      "mean": 2.0,
+      "count": 2,
+      "std": 0.0
+    },
+    "SAS B SOUS CHAMP 1 ELECTROFILTRE B": {
+      "mean": 2.0,
+      "count": 4,
+      "std": 0.0
+    },
+    "SAS A SOUS ÉCONOMISEUR": {
+      "mean": 2.0,
+      "count": 2,
+      "std": 0.0
+    },
+    "SAS A SOUS CHAMP 6 ELECTROFILTRE B": {
+      "mean": 2.0,
+      "count": 14,
+      "std": 0.0
+    },
+    "REGISTRE D'AIR COIN 4 PLAN  OFA4": {
+      "mean": 2.0,
+      "count": 2,
+      "std": 0.0
+    },
+    "AIR HEATER SOOTBLOWER  PESSURE REDUCING STATION": {
+      "mean": 2.0,
+      "count": 7,
+      "std": 0.0
+    },
+    "REGISTRE ASPIRAT VENTILATEUR  SOUFLAGE A": {
+      "mean": 2.0,
+      "count": 3,
+      "std": 0.0
+    },
+    "REGISTRE AIR FROID BROYEUR D.": {
+      "mean": 2.0,
+      "count": 8,
+      "std": 0.0
+    },
+    "REGISTRE AIR FROID BROYEUR B.": {
+      "mean": 2.0,
+      "count": 8,
+      "std": 0.0
+    },
+    "REFROIDISSEUR D'HUILE DE GRAISSAGE": {
+      "mean": 2.0,
+      "count": 2,
+      "std": 0.0
+    },
+    "Vidange Pompe Alimentaire N°30": {
+      "mean": 2.0,
+      "count": 4,
+      "std": 0.0
+    },
+    "RAMONEUR N°39 D'EFFACEMENT TYPE IR": {
+      "mean": 2.0,
+      "count": 2,
+      "std": 0.0
+    },
+    "RAMONEUR N°31 D'EFFACEMENT TYPE IR": {
+      "mean": 2.0,
+      "count": 3,
+      "std": 0.0
+    },
+    "RAMONEUR N°29 D'EFFACEMENT TYPE IR": {
+      "mean": 2.0,
+      "count": 2,
+      "std": 0.0
+    },
+    "COAL FEEDER A CONTROL CABINET": {
+      "mean": 2.0,
+      "count": 3,
+      "std": 0.0
+    },
+    "SAS A SOUS CHAMP 3 ELECTROFILTRE A": {
+      "mean": 2.0,
+      "count": 8,
+      "std": 0.0
+    },
+    "Vidange Pompe Alimentaire N°20": {
+      "mean": 2.0,
+      "count": 2,
+      "std": 0.0
+    },
+    "SAS A SOUS CHAMP 2 ELECTROFILTRE A": {
+      "mean": 2.0,
+      "count": 10,
+      "std": 0.0
+    },
+    "contacteur de niveau très haut purges échappement corps HP.": {
+      "mean": 2.0,
+      "count": 2,
+      "std": 0.0
+    },
+    "Ventilateur de tirage B": {
+      "mean": 2.0,
+      "count": 3,
+      "std": 0.0
+    },
+    "SAS  SOUS CHAMP 6 ELECTROFILTRE B": {
+      "mean": 2.0,
+      "count": 2,
+      "std": 0.0
+    },
+    "SAS  SOUS CHAMP 6 ELECTROFILTRE A": {
+      "mean": 2.0,
+      "count": 14,
+      "std": 0.0
+    },
+    "SAS  SOUS CHAMP 2 ELECTROFILTRE A": {
+      "mean": 2.0,
+      "count": 2,
+      "std": 0.0
+    },
+    "Réglante déverseuse": {
+      "mean": 2.0,
+      "count": 5,
+      "std": 0.0
+    },
+    "RÉDUCTEUR DE VITESSE DE CONVOYEUR DE NETTOYAGE ALI": {
+      "mean": 2.0,
+      "count": 3,
+      "std": 0.0
+    },
+    "BWCP B DIFFERENTIAL PRESS": {
+      "mean": 2.0,
+      "count": 3,
+      "std": 0.0
+    },
+    "BALLON CHAUDIERE.": {
+      "mean": 2.0,
+      "count": 2,
+      "std": 0.0
+    },
+    "COAL FEEDER D ARMOIRE": {
+      "mean": 2.0,
+      "count": 3,
+      "std": 0.0
+    },
+    "Ventilateur de souflage B": {
+      "mean": 2.0,
+      "count": 3,
+      "std": 0.0
+    },
+    "AIR HEATER SOOTBLOWER  ISOLATON": {
+      "mean": 2.0,
+      "count": 4,
+      "std": 0.0
+    },
+    "ARMOIRE DE CONTROLE DU SYSTEME D'INJECTION SO3 DE": {
+      "mean": 2.0,
+      "count": 3,
+      "std": 0.0
+    },
+    "REGISTRE D'AIR COIN 4 PLAN  OFA2": {
+      "mean": 2.0,
+      "count": 2,
+      "std": 0.0
+    },
+    "SEAL AIR FAN B INLET SHUTOFF": {
+      "mean": 2.0,
+      "count": 2,
+      "std": 0.0
+    },
+    "SCANNER AIR FILTER(FAN A INLET)": {
+      "mean": 2.0,
+      "count": 3,
+      "std": 0.0
+    },
+    "SAS B SOUS CHAMP 5 ELECTROFILTRE A": {
+      "mean": 2.0,
+      "count": 2,
+      "std": 0.0
+    },
+    "SAS B SOUS CHAMP 3 ELECTROFILTRE A": {
+      "mean": 2.0,
+      "count": 5,
+      "std": 0.0
+    },
+    "VANNE DE REMPLISSAGE SAS A SOUS CHAMP 6 ELECTROFIL": {
+      "mean": 2.0,
+      "count": 3,
+      "std": 0.0
+    },
+    "VANNE DE REMPLISSAGE SAS A SOUS CHAMP 5 ELECTROFIL": {
+      "mean": 2.0,
+      "count": 3,
+      "std": 0.0
+    },
+    "VANNE DE REMPLISSAGE SAS A SOUS CHAMP 4 ELECTROFIL": {
+      "mean": 2.0,
+      "count": 5,
+      "std": 0.0
+    },
+    "Ventilateur d'air primair A": {
+      "mean": 2.0,
+      "count": 6,
+      "std": 0.6324555320336759
+    },
+    "VANNE DE REMPLISSAGE SAS A SOUS CHAMP 2 ELECTROFIL": {
+      "mean": 2.0,
+      "count": 5,
+      "std": 0.0
+    },
+    "VENTILATEUR REFRIGERANT": {
+      "mean": 2.0,
+      "count": 5,
+      "std": 0.0
+    },
+    "VENTILATEUR DE REFROIDISSEMENT TP": {
+      "mean": 2.0,
+      "count": 3,
+      "std": 0.0
+    },
+    "VENTILATEUR AIR SCANNEUR": {
+      "mean": 2.0,
+      "count": 9,
+      "std": 0.0
+    },
+    "VANNE REGULATRICE DE TEMPERATURE DE CHAUFFAGE FIOU": {
+      "mean": 2.0,
+      "count": 3,
+      "std": 0.0
+    },
+    "Vanne isolement CP Broyeur C / foyer angle 2": {
+      "mean": 2.0,
+      "count": 2,
+      "std": 0.0
+    },
+    "Tombour filtarnt": {
+      "mean": 1.981818181818182,
+      "count": 55,
+      "std": 0.35957325998039574
+    },
+    "POMPE D'APPOINT N°1  (EAU DÉMINÉRALISÉE)": {
+      "mean": 1.9761904761904763,
+      "count": 42,
+      "std": 0.4124936208284414
+    },
+    "DECRASSEUR": {
+      "mean": 1.9675324675324675,
+      "count": 154,
+      "std": 0.3114132065495608
+    },
+    "SYSTEM ETG": {
+      "mean": 1.9666666666666666,
+      "count": 90,
+      "std": 0.31622776601683794
+    },
+    "broyeur C": {
+      "mean": 1.9545454545454546,
+      "count": 22,
+      "std": 0.37509017674772643
+    },
+    "PULVERIZER A1 DISCHARGE": {
+      "mean": 1.9473684210526316,
+      "count": 19,
+      "std": 0.22941573387056174
+    },
+    "broyeur B": {
+      "mean": 1.9473684210526316,
+      "count": 19,
+      "std": 0.22941573387056174
+    },
+    "COAL FEEDER B": {
+      "mean": 1.9411764705882353,
+      "count": 17,
+      "std": 0.24253562503633297
+    },
+    "Pompe Eau de Mer 10": {
+      "mean": 1.9333333333333333,
+      "count": 15,
+      "std": 0.45773770821706344
+    },
+    "Transmetteur de pression foyer ..": {
+      "mean": 1.9333333333333333,
+      "count": 15,
+      "std": 0.2581988897471611
+    },
+    "VANNE DE REMPLISSAGE SAS A SOUS CHAMP 1 ELECTROFIL": {
+      "mean": 1.9333333333333333,
+      "count": 15,
+      "std": 0.2581988897471611
+    },
+    "Pompe eau stator": {
+      "mean": 1.9285714285714286,
+      "count": 14,
+      "std": 0.2672612419124244
+    },
+    "SYSTEME ETP": {
+      "mean": 1.9285714285714286,
+      "count": 14,
+      "std": 0.2672612419124244
+    },
+    "Dégrilleur": {
+      "mean": 1.9242424242424243,
+      "count": 66,
+      "std": 0.2666375275454884
+    },
+    "COMMANDE DES INCLINAISON BRÛLEURS COIN 1.": {
+      "mean": 1.9166666666666667,
+      "count": 12,
+      "std": 0.28867513459481287
+    },
+    "Moteur pompe eau de mer 20": {
+      "mean": 1.9166666666666667,
+      "count": 12,
+      "std": 0.2886751345948129
+    },
+    "MOTEUR BROYEUR B": {
+      "mean": 1.9090909090909092,
+      "count": 11,
+      "std": 0.30151134457776363
+    },
+    "ELECTROFILTRE A": {
+      "mean": 1.9090909090909092,
+      "count": 33,
+      "std": 0.3843530573929037
+    },
+    "SAS A SOUS CHAMP 3 ELECTROFILTRE B": {
+      "mean": 1.9090909090909092,
+      "count": 11,
+      "std": 0.30151134457776363
+    },
+    "SAS  SOUS CHAMP 1 ELECTROFILTRE A": {
+      "mean": 1.9,
+      "count": 10,
+      "std": 0.31622776601683794
+    },
+    "SAS A SOUS CHAMP 5 ELECTROFILTRE A": {
+      "mean": 1.9,
+      "count": 10,
+      "std": 0.31622776601683794
+    },
+    "SOUPAPE REGULATRICE TURBINE": {
+      "mean": 1.8888888888888888,
+      "count": 9,
+      "std": 0.3333333333333333
+    },
+    "Tube de pitaux N°1 aspiration ventillateur A\".\"": {
+      "mean": 1.8857142857142857,
+      "count": 35,
+      "std": 0.3228028510906756
+    },
+    "Pompe nouriciere (booster)   N°20": {
+      "mean": 1.8823529411764706,
+      "count": 17,
+      "std": 0.3321055820775357
+    },
+    "POMPE D'APPOINT N°2  (EAU DÉMINÉRALISÉE)": {
+      "mean": 1.88,
+      "count": 25,
+      "std": 0.33166247903553997
+    },
+    "unité 03": {
+      "mean": 1.8604651162790697,
+      "count": 172,
+      "std": 0.5333945293328461
+    },
+    "Purge ballon chaudière 1%": {
+      "mean": 1.8571428571428572,
+      "count": 7,
+      "std": 0.3779644730092272
+    },
+    "Pressostat différentiel de contrôle de delta P  air chaud/foyer": {
+      "mean": 1.8571428571428572,
+      "count": 7,
+      "std": 0.3779644730092272
+    },
+    "Pompe Noria secourue": {
+      "mean": 1.8461538461538463,
+      "count": 13,
+      "std": 0.6887372317211944
+    },
+    "SYSTEM ETA": {
+      "mean": 1.8421052631578947,
+      "count": 19,
+      "std": 0.7647191129018727
+    },
+    "FURANCE TEMP PROB": {
+      "mean": 1.8333333333333333,
+      "count": 12,
+      "std": 0.38924947208076144
+    },
+    "Mesure de Température Enroulement 1 Moteur de la Pompe d'Extraction 10": {
+      "mean": 1.8333333333333333,
+      "count": 6,
+      "std": 0.408248290463863
+    },
+    "ECLAIRAGE DE LA SALLE MACHINE UNITE 3 LP": {
+      "mean": 1.8333333333333333,
+      "count": 6,
+      "std": 0.752772652709081
+    },
+    "Echangeur Noria": {
+      "mean": 1.8333333333333333,
+      "count": 36,
+      "std": 0.50709255283711
+    },
+    "POMPE D'EXTRACTION  N°2": {
+      "mean": 1.8333333333333333,
+      "count": 18,
+      "std": 0.38348249442368515
+    },
+    "TRANSFORMATEUR 6,6KV/0,4KV U3": {
+      "mean": 1.8333333333333333,
+      "count": 12,
+      "std": 0.38924947208076155
+    },
+    "RAMONEUR LONG RETRACTABLE N°14 TYPE IKPOUR LES ÉCH": {
+      "mean": 1.8333333333333333,
+      "count": 6,
+      "std": 0.408248290463863
+    },
+    "Tube de pitaux N°1 aspiration ventillateur B\".\"": {
+      "mean": 1.826086956521739,
+      "count": 23,
+      "std": 0.3875533878815899
+    },
+    "COMPRESSEUR D'AIR B TYPE GA90W": {
+      "mean": 1.8181818181818181,
+      "count": 11,
+      "std": 0.40451991747794525
+    },
+    "COMPRESSEUR D'AIR A TYPE GA90W": {
+      "mean": 1.8181818181818181,
+      "count": 11,
+      "std": 0.40451991747794525
+    },
+    "PULV  D LUBE OIL HEATER": {
+      "mean": 1.8181818181818181,
+      "count": 11,
+      "std": 0.40451991747794525
+    },
+    "SOUPAPE MODIRATRICE TURBINE": {
+      "mean": 1.8181818181818181,
+      "count": 11,
+      "std": 0.40451991747794525
+    },
+    "Armoires d' automates Advant 450": {
+      "mean": 1.8181818181818181,
+      "count": 11,
+      "std": 0.40451991747794525
+    },
+    "Systeme  de broyage U3": {
+      "mean": 1.8125,
+      "count": 16,
+      "std": 0.5439056290693574
+    },
+    "Systeme ramonage U3": {
+      "mean": 1.8048780487804879,
+      "count": 41,
+      "std": 0.5108577196794599
+    },
+    "Débit nul pompe alimentaires 30": {
+      "mean": 1.8,
+      "count": 5,
+      "std": 0.4472135954999579
+    },
+    "Pompe alimentaire  principale  N° 10": {
+      "mean": 1.8,
+      "count": 15,
+      "std": 0.560611910581388
+    },
+    "Système d'allumage chaudiere (allumeurs) U3": {
+      "mean": 1.8,
+      "count": 5,
+      "std": 0.4472135954999579
+    },
+    "ELECTROFILTRE B": {
+      "mean": 1.8,
+      "count": 5,
+      "std": 0.4472135954999579
+    },
+    "MOTEUR POMPE D'EXTRACTION 2": {
+      "mean": 1.8,
+      "count": 5,
+      "std": 0.4472135954999579
+    },
+    "POMPE D'EXTRACTION  N°1": {
+      "mean": 1.8,
+      "count": 5,
+      "std": 0.4472135954999579
+    },
+    "COAL FEEDER D": {
+      "mean": 1.8,
+      "count": 5,
+      "std": 0.4472135954999579
+    },
+    "COMPRESSEUR D'AIR A TYPE XXXXX": {
+      "mean": 1.8,
+      "count": 5,
+      "std": 0.4472135954999579
+    },
+    "MOTEUR VENTILATEUR DE TIRAGE A": {
+      "mean": 1.8,
+      "count": 10,
+      "std": 0.4216370213557839
+    },
+    "MOTEUR BROYEUR D": {
+      "mean": 1.8,
+      "count": 10,
+      "std": 0.42163702135578396
+    },
+    "STATION HYDRAULIQUE BP": {
+      "mean": 1.7777777777777777,
+      "count": 9,
+      "std": 0.44095855184409843
+    },
+    "ARMOIRES SYSTEME D'EXCITATION.": {
+      "mean": 1.75,
+      "count": 4,
+      "std": 1.5
+    },
+    "SAS B SOUS CHAMP 6 ELECTROFILTRE A": {
+      "mean": 1.75,
+      "count": 4,
+      "std": 0.5
+    },
+    "SOUPAPE DE SECURITE ALIMENTATION D' EAU DEMINERALI": {
+      "mean": 1.75,
+      "count": 4,
+      "std": 0.5
+    },
+    "NIV DESCHARGE": {
+      "mean": 1.75,
+      "count": 4,
+      "std": 0.5
+    },
+    "Auxiliaires Chaudière": {
+      "mean": 1.75,
+      "count": 4,
+      "std": 0.5
+    },
+    "CONVOYEUR DE NETTOYAGE  ALIMENTATEUR B": {
+      "mean": 1.75,
+      "count": 4,
+      "std": 0.5
+    },
+    "CUVE À HUILE TURBINE": {
+      "mean": 1.75,
+      "count": 4,
+      "std": 0.9574271077563382
+    },
+    "FOYER DE LA CHADIERE.": {
+      "mean": 1.75,
+      "count": 8,
+      "std": 0.4629100498862757
+    },
+    "BOILER  SOOTBLOWER  PESSURE REDUCING STATION": {
+      "mean": 1.75,
+      "count": 4,
+      "std": 0.5
+    },
+    "BROYEUR A": {
+      "mean": 1.75,
+      "count": 28,
+      "std": 0.4409585518440986
+    },
+    "Moteur pompe alimentaire 30": {
+      "mean": 1.75,
+      "count": 4,
+      "std": 0.5
+    },
+    "MOTEUR POMPE TOMBOUR FILTRANT": {
+      "mean": 1.75,
+      "count": 4,
+      "std": 0.9574271077563381
+    },
+    "Système huile turbine": {
+      "mean": 1.75,
+      "count": 12,
+      "std": 0.45226701686664544
+    },
+    "Mesure de la teneur O2 dans les Gaz  Entrée Réchauffeur d'Air": {
+      "mean": 1.736842105263158,
+      "count": 19,
+      "std": 0.452413928358864
+    },
+    "ALTERNATEUR": {
+      "mean": 1.7333333333333334,
+      "count": 15,
+      "std": 0.7037315505489967
+    },
+    "Pompe alimentaire  principale  N° 30": {
+      "mean": 1.7272727272727273,
+      "count": 11,
+      "std": 0.46709936649691375
+    },
+    "Electrofiltre": {
+      "mean": 1.7222222222222223,
+      "count": 18,
+      "std": 0.46088859896247686
+    },
+    "Pompe alimentaire  principale  N° 20": {
+      "mean": 1.7,
+      "count": 10,
+      "std": 0.4830458915396479
+    },
+    "Armoire des moniteurs de vibration des ventilateurs d'air (ID,FD, PA )": {
+      "mean": 1.6666666666666667,
+      "count": 3,
+      "std": 0.5773502691896258
+    },
+    "Ventilateur d'air primair  B": {
+      "mean": 1.6666666666666667,
+      "count": 3,
+      "std": 0.5773502691896257
+    },
+    "vannes vapeur auxiliaire": {
+      "mean": 1.6666666666666667,
+      "count": 3,
+      "std": 0.5773502691896257
+    },
+    "COAL FEEDER B ARMOIRE": {
+      "mean": 1.6666666666666667,
+      "count": 3,
+      "std": 0.5773502691896257
+    },
+    "COAL FEEDER C ARMOIRE": {
+      "mean": 1.6666666666666667,
+      "count": 3,
+      "std": 0.5773502691896257
+    },
+    "BRÛLEUR A FIOUL ANGLE 1 ELEVATION AB.": {
+      "mean": 1.6666666666666667,
+      "count": 3,
+      "std": 0.5773502691896257
+    },
+    "VANNE RÉGULATRICE": {
+      "mean": 1.6666666666666667,
+      "count": 3,
+      "std": 0.5773502691896257
+    },
+    "Transmetteur 2 de pression différentielle huile etancheite H2 alternateur": {
+      "mean": 1.6666666666666667,
+      "count": 3,
+      "std": 0.5773502691896258
+    },
+    "Pressostat de Contrôle de Pression Sas  XXXXXXXXXXX": {
+      "mean": 1.6666666666666667,
+      "count": 3,
+      "std": 0.5773502691896258
+    },
+    "Purge collecteur by-pass BP": {
+      "mean": 1.6666666666666667,
+      "count": 3,
+      "std": 0.5773502691896257
+    },
+    "MOTEUR POMPE DE LAVAGE TOMBOUR FILTRANT": {
+      "mean": 1.6666666666666667,
+      "count": 3,
+      "std": 0.5773502691896257
+    },
+    "PP 50 DESCHARGE": {
+      "mean": 1.6666666666666667,
+      "count": 3,
+      "std": 0.5773502691896258
+    },
+    "Main burners U3": {
+      "mean": 1.6666666666666667,
+      "count": 3,
+      "std": 0.5773502691896257
+    },
+    "RECHAUFFEUR HP 7": {
+      "mean": 1.6666666666666667,
+      "count": 3,
+      "std": 0.5773502691896257
+    },
+    "TRANSFO PRINCIPAL": {
+      "mean": 1.6363636363636365,
+      "count": 11,
+      "std": 0.504524979109513
+    },
+    "Soupape": {
+      "mean": 1.625,
+      "count": 8,
+      "std": 0.5175491695067657
+    },
+    "REGISTRE AIR FROID BROYEUR C.": {
+      "mean": 1.6,
+      "count": 5,
+      "std": 0.5477225575051661
+    },
+    "PULV A LUBE OIL HEATER": {
+      "mean": 1.6,
+      "count": 5,
+      "std": 0.5477225575051661
+    },
+    "Désurchauffe du Contour LP By-pass": {
+      "mean": 1.6,
+      "count": 5,
+      "std": 0.5477225575051662
+    },
+    "BY-PASS BP": {
+      "mean": 1.5714285714285714,
+      "count": 7,
+      "std": 0.5345224838248488
+    },
+    "Systeme de Ventilateurs d'air primaire U3": {
+      "mean": 1.5714285714285714,
+      "count": 7,
+      "std": 0.5345224838248488
+    },
+    "Medium-voltage distribution boards, normal system": {
+      "mean": 1.5454545454545454,
+      "count": 11,
+      "std": 0.5222329678670935
+    },
+    "CORNER 4 EL .AB  ATOMAZING STEAM ISOLATION": {
+      "mean": 1.5,
+      "count": 2,
+      "std": 0.7071067811865476
+    },
+    "MILL MAINTENANCE HOIST": {
+      "mean": 1.5,
+      "count": 2,
+      "std": 0.7071067811865476
+    },
+    "SAS DE PYRITE A SORTIE BROYEUR C": {
+      "mean": 1.5,
+      "count": 2,
+      "std": 0.7071067811865476
+    },
+    "Registre au refoulement  ventilateur  de tirage  A": {
+      "mean": 1.5,
+      "count": 2,
+      "std": 0.7071067811865476
+    },
+    "Armoire de Contrôle Automate Node 31": {
+      "mean": 1.5,
+      "count": 2,
+      "std": 0.7071067811865476
+    },
+    "ASCENSEUR CHAUDIÈRE UNITÉS 3": {
+      "mean": 1.5,
+      "count": 2,
+      "std": 0.7071067811865476
+    },
+    "Armoire de Contrôle Automate Node 35": {
+      "mean": 1.5,
+      "count": 2,
+      "std": 0.7071067811865476
+    },
+    "Registres aspiration air primaire et secondaire U3": {
+      "mean": 1.5,
+      "count": 2,
+      "std": 0.7071067811865476
+    },
+    "SECHEUR POUR COMPRESSEUR D'AIR A TYPE GGGGGG": {
+      "mean": 1.5,
+      "count": 2,
+      "std": 0.7071067811865476
+    },
+    "Détecteurs de flamme U3": {
+      "mean": 1.5,
+      "count": 4,
+      "std": 0.5773502691896257
+    },
+    "BWCP C MOTOR TEMP": {
+      "mean": 1.5,
+      "count": 2,
+      "std": 0.7071067811865476
+    },
+    "CONTROL CABINET": {
+      "mean": 1.5,
+      "count": 2,
+      "std": 0.7071067811865476
+    },
+    "CONDUITE EAU DE MER UNITÉ 3": {
+      "mean": 1.5,
+      "count": 2,
+      "std": 0.7071067811865476
+    },
+    "CORNER 1 ATOMAZING STEAM VENT": {
+      "mean": 1.5,
+      "count": 2,
+      "std": 0.7071067811865476
+    },
+    "CAMERA N°2 DE SURVEILLANCE FOYER": {
+      "mean": 1.5,
+      "count": 2,
+      "std": 0.7071067811865476
+    },
+    "SERVOMOTEUR VANNE MOT. REFOUL. PP D'EXTRACTION 1": {
+      "mean": 1.5,
+      "count": 2,
+      "std": 0.7071067811865476
+    },
+    "STEAM INERTING HEADER DRAIN LINE ISOLATION": {
+      "mean": 1.5,
+      "count": 2,
+      "std": 0.7071067811865476
+    },
+    "CONVOYEUR DE NETTOYAGE  ALIMENTATEUR D": {
+      "mean": 1.5,
+      "count": 2,
+      "std": 0.7071067811865476
+    },
+    "CLD RH TURB OUT PRESS": {
+      "mean": 1.5,
+      "count": 4,
+      "std": 0.5773502691896257
+    },
+    "MOTEUR DE NETTOYAGE CONVOYEUR ALIMENTATEUR": {
+      "mean": 1.5,
+      "count": 2,
+      "std": 0.7071067811865476
+    },
+    "MOTEUR DE LA POMPE HP N°1 DE COMMANDE DES ORGANES": {
+      "mean": 1.5,
+      "count": 2,
+      "std": 0.7071067811865476
+    },
+    "Pompe Noria non secourue": {
+      "mean": 1.5,
+      "count": 8,
+      "std": 0.5345224838248488
+    },
+    "SOUPAPE DE RAMONEUR LONG RETRACTABLE N°27 TYPE IK": {
+      "mean": 1.5,
+      "count": 2,
+      "std": 0.7071067811865476
+    },
+    "SOUPAPE DE RAMONEUR LONG RETRACTABLE N°33 TYPE IK": {
+      "mean": 1.5,
+      "count": 4,
+      "std": 0.5773502691896257
+    },
+    "SECHEUR POUR COMPRESSEUR D'AIR B TYPE GGGGG": {
+      "mean": 1.5,
+      "count": 4,
+      "std": 0.5773502691896257
+    },
+    "MOTEUR POMPE DOSEUSE AMMONIAC 1": {
+      "mean": 1.5,
+      "count": 2,
+      "std": 0.7071067811865476
+    },
+    "TRANSFORMATEUR REDRESSEUR CHAMP6 FILE B": {
+      "mean": 1.5,
+      "count": 2,
+      "std": 0.7071067811865476
+    },
+    "FILTRE HUILE DE GRAISSAGE TURBINE": {
+      "mean": 1.5,
+      "count": 2,
+      "std": 0.7071067811865476
+    },
+    "Transformateur compound": {
+      "mean": 1.5,
+      "count": 4,
+      "std": 0.5773502691896257
+    },
+    "DIF P ECH20 CCCW": {
+      "mean": 1.5,
+      "count": 2,
+      "std": 0.7071067811865476
+    },
+    "Pompe nouriciere (booster)  N°30": {
+      "mean": 1.4285714285714286,
+      "count": 7,
+      "std": 0.5345224838248488
+    },
+    "BY-PASS HP": {
+      "mean": 1.4285714285714286,
+      "count": 7,
+      "std": 0.5345224838248488
+    },
+    "VANNE D'ISOLEMENT": {
+      "mean": 1.4166666666666667,
+      "count": 12,
+      "std": 0.5149286505444373
+    },
+    "SECHEUR DE GAZ 1": {
+      "mean": 1.3333333333333333,
+      "count": 3,
+      "std": 0.5773502691896257
+    },
+    "Batteries": {
+      "mean": 1.3333333333333333,
+      "count": 3,
+      "std": 0.5773502691896257
+    },
+    "T HPT STARTING TRIPLE ELE": {
+      "mean": 1.3333333333333333,
+      "count": 3,
+      "std": 0.5773502691896257
+    },
+    "ARMOIRE AUX. POTECTION NUM. ALTERNATEUR PRINCIPAL": {
+      "mean": 1.25,
+      "count": 4,
+      "std": 0.5
+    },
+    "Low voltage main distribution boards": {
+      "mean": 1.25,
+      "count": 4,
+      "std": 0.5
+    },
+    "Air heating system (flue-gas-heated)": {
+      "mean": 1.25,
+      "count": 4,
+      "std": 0.5
+    },
+    "POMPE DOSEUSE D'AMMONIAQUE": {
+      "mean": 1.05,
+      "count": 20,
+      "std": 0.22360679774997894
+    },
+    "Armoire de Contrôle Régulation et Sécurité Turbine": {
+      "mean": 1.0,
+      "count": 4,
+      "std": 0.0
+    },
+    "RÉSERVOIR DE PHSPHATE": {
+      "mean": 1.0,
+      "count": 2,
+      "std": 0.0
+    },
+    "REGISTRE AIR CHAUD BROYEUR A": {
+      "mean": 1.0,
+      "count": 2,
+      "std": 0.0
+    },
+    "Resurchauffeur HT U3": {
+      "mean": 1.0,
+      "count": 2,
+      "std": 0.0
+    },
+    "RESERVOIR D'HUILE": {
+      "mean": 1.0,
+      "count": 3,
+      "std": 0.0
+    },
+    "MÉLANGEUR DU RÉSERVOIR DE PHSPHATE": {
+      "mean": 1.0,
+      "count": 3,
+      "std": 0.0
+    },
+    "POMPE DOSEUSE DE PHOSPHATE": {
+      "mean": 1.0,
+      "count": 10,
+      "std": 0.0
+    },
+    "PROTECTION ALTERNATEUR": {
+      "mean": 1.0,
+      "count": 2,
+      "std": 0.0
+    },
+    "POMPE DOSEUSE D'HYDRAZINE": {
+      "mean": 1.0,
+      "count": 4,
+      "std": 0.0
+    },
+    "Système d'alimentation en fioul": {
+      "mean": 1.0,
+      "count": 2,
+      "std": 0.0
+    },
+    "MÉLANGEUR DU RÉSERVOIR D'AMMONIAQUE": {
+      "mean": 1.0,
+      "count": 4,
+      "std": 0.0
+    },
+    "GROUPE D'ENTRAINEMENT DECRASSEUR (REDUCTEUR DE VIT": {
+      "mean": 1.0,
+      "count": 2,
+      "std": 0.0
+    },
+    "Indicateur  de niveau d'huile Station Hydraulique  du Broyeur A": {
+      "mean": 1.0,
+      "count": 2,
+      "std": 0.0
+    },
+    "Echangeur SBT": {
+      "mean": 1.0,
+      "count": 2,
+      "std": 0.0
+    },
+    "MOTEUR AGITATEUR RESERVOIR HYDRAZINE": {
+      "mean": 1.0,
+      "count": 4,
+      "std": 0.0
+    },
+    "MOTEUR AGITATEUR RESERVOIR PHOSPHATE": {
+      "mean": 1.0,
+      "count": 2,
+      "std": 0.0
+    },
+    "HP TURB INLET TEMP": {
+      "mean": 1.0,
+      "count": 2,
+      "std": 0.0
+    },
+    "MOTEUR AGITATEUR RESERVOIR AMMONIAC": {
+      "mean": 1.0,
+      "count": 3,
+      "std": 0.0
+    }
+  },
+  "section_priorities": {
+    "34CT": {
+      "mean": 1.9273858921161826,
+      "count": 964
+    },
+    "34EL": {
+      "mean": 1.90897597977244,
+      "count": 791
+    },
+    "34MC": {
+      "mean": 1.967992240543162,
+      "count": 1031
+    },
+    "34MD": {
+      "mean": 1.99822695035461,
+      "count": 564
+    },
+    "34MG": {
+      "mean": 1.9583333333333333,
+      "count": 24
+    },
+    "34MM": {
+      "mean": 1.9131075110456555,
+      "count": 679
+    }
+  },
+  "keyword_analysis": {
+    "priority_1.0": {
+      "prévoir": 85,
+      "pompe": 70,
+      "huile": 67,
+      "défaut": 59,
+      "niveau": 56,
+      "fuite": 43,
+      "contrôle": 38,
+      "vanne": 35,
+      "remise": 34,
+      "pour": 31,
+      "état": 29,
+      "appoint": 28,
+      "moteur": 28,
+      "tr03": 25,
+      "broyeur": 24,
+      "électrique": 23,
+      "nettoyage": 22,
+      "soufflage": 22,
+      "changement": 20,
+      "arrêt": 19
+    },
+    "priority_2.0": {
+      "prévoir": 1103,
+      "niveau": 568,
+      "fuite": 553,
+      "huile": 428,
+      "pompe": 425,
+      "vanne": 394,
+      "champ": 291,
+      "broyeur": 260,
+      "état": 241,
+      "contrôle": 238,
+      "filtre": 229,
+      "remise": 225,
+      "appoint": 216,
+      "soufflage": 211,
+      "moteur": 198,
+      "conduite": 185,
+      "fioul": 154,
+      "ramoneur": 149,
+      "nettoyage": 147,
+      "pression": 141
+    },
+    "priority_3.0": {
+      "pompe": 55,
+      "fuite": 35,
+      "prévoir": 34,
+      "filtre": 30,
+      "fioul": 28,
+      "dans": 26,
+      "huile": 25,
+      "vanne": 24,
+      "champ": 23,
+      "niveau": 22,
+      "indicateur": 20,
+      "vapeur": 15,
+      "pression": 14,
+      "encrassement": 14,
+      "commande": 14,
+      "manque": 13,
+      "état": 13,
+      "réchauffeur": 13,
+      "remise": 13,
+      "percement": 12
+    },
+    "priority_4.0": {
+      "ateliers": 3,
+      "révision": 3,
+      "travaux": 3,
+      "pompe": 2,
+      "étanche": 2,
+      "alimentaire": 2,
+      "vanne": 2,
+      "coupleur": 2,
+      "démonté": 2,
+      "hydraulique": 2,
+      "pour": 2,
+      "achat": 1,
+      "paramètres": 1,
+      "relais": 1,
+      "électriques": 1,
+      "consommables": 1,
+      "branchement": 1,
+      "hall": 1,
+      "dans": 1,
+      "réserve": 1
+    }
+  },
+  "default_priority": 1.940039158100832,
+  "priority_distribution": {
+    "1.0": 500,
+    "2.0": 3341,
+    "3.0": 235,
+    "4.0": 10
+  },
+  "created_date": "2025-06-24T16:33:02.024014"
+}
