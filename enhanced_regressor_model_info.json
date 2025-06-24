@@ -1,0 +1,20 @@
+{
+  "model_name": "Enhanced Random Forest",
+  "features_count": 126,
+  "training_samples": 6344,
+  "mae": 0.15107174192922598,
+  "mse": 0.10585791184197159,
+  "r2": 0.76950832552372,
+  "priority_range": [
+    1.0,
+    5.0
+  ],
+  "created_date": "2025-06-24T14:05:50.011682",
+  "improvements": [
+    "Rule-based handling of missing priorities",
+    "Enhanced French keyword detection",
+    "Better feature engineering",
+    "Improved model parameters",
+    "Extended priority range support"
+  ]
+}

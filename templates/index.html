@@ -1,0 +1,437 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TAQA Anomaly Priority Classifier - Lookup System</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+
+        .accuracy-badge {
+            background: #27ae60;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.9em;
+            margin-top: 10px;
+            display: inline-block;
+        }
+
+        .form-container {
+            padding: 40px;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        input, textarea, select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e1e8ed;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s ease;
+        }
+
+        input:focus, textarea:focus, select:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            width: 100%;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .result-container {
+            margin-top: 30px;
+            padding: 25px;
+            border-radius: 10px;
+            display: none;
+        }
+
+        .result-high {
+            background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+            color: white;
+        }
+
+        .result-medium {
+            background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%);
+            color: white;
+        }
+
+        .result-low {
+            background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+            color: white;
+        }
+
+        .priority-badge {
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 1.1em;
+            margin-bottom: 15px;
+        }
+
+        .method-badge {
+            background: rgba(255,255,255,0.2);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 0.8em;
+            margin-left: 10px;
+        }
+
+        .confidence-bar {
+            background: rgba(255,255,255,0.2);
+            border-radius: 10px;
+            height: 20px;
+            margin: 10px 0;
+            overflow: hidden;
+        }
+
+        .confidence-fill {
+            height: 100%;
+            background: rgba(255,255,255,0.8);
+            transition: width 0.5s ease;
+        }
+
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #667eea;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 15px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .error {
+            background: #e74c3c;
+            color: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+            display: none;
+        }
+
+        .example-btn {
+            background: #95a5a6;
+            color: white;
+            padding: 8px 15px;
+            border: none;
+            border-radius: 5px;
+            font-size: 14px;
+            cursor: pointer;
+            margin: 5px 5px 10px 0;
+            transition: background 0.3s ease;
+        }
+
+        .example-btn:hover {
+            background: #7f8c8d;
+        }
+
+        .info-section {
+            background: #f8f9fa;
+            padding: 20px;
+            border-left: 4px solid #667eea;
+            margin-bottom: 20px;
+            border-radius: 5px;
+        }
+
+        .equipment-suggestions {
+            font-size: 0.9em;
+            color: #666;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1> TAQA Anomaly Classifier</h1>
+            <div class="accuracy-badge">82% Accuracy  Lookup-Based System</div>
+        </div>
+
+        <div class="form-container">
+
+
+            <form id="anomalyForm">
+                <div class="form-group">
+                    <label for="description">Anomaly Description *</label>
+                    <textarea id="description" name="description" required 
+                              placeholder="Describe the anomaly in detail (French text preferred)..."></textarea>
+                    <button type="button" class="example-btn" onclick="loadExample('high')">Critical Equipment</button>
+                    <button type="button" class="example-btn" onclick="loadExample('medium')">Standard Maintenance</button>
+                    <button type="button" class="example-btn" onclick="loadExample('low')">Minor Issue</button>
+                </div>
+
+                <div class="form-group">
+                    <label for="equipment_type">Equipment Type *</label>
+                    <input type="text" id="equipment_type" name="equipment_type" required
+                           placeholder="e.g., MOTEUR POMPE ALIMENTAIRE, évents ballon chaudière, VENTILATEUR...">
+                    <div class="equipment-suggestions">
+                         Tip: Use exact equipment names from TAQA system for best accuracy
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="section">Section/Department *</label>
+                    <select id="section" name="section" required>
+                        <option value="">Select Section</option>
+                        <option value="34MD">34MD - Mechanical Maintenance (Highest avg: 2.00)</option>
+                        <option value="34MC">34MC - Mechanical (Avg: 1.97)</option>
+                        <option value="34MG">34MG - Mechanical General (Avg: 1.96)</option>
+                        <option value="34CT">34CT - Control (Avg: 1.93)</option>
+                        <option value="34MM">34MM - Mechanical Maintenance (Avg: 1.91)</option>
+                        <option value="34EL">34EL - Electrical (Avg: 1.91)</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="btn" id="submitBtn">
+                     Get Priority Score
+                </button>
+            </form>
+
+            <div class="loading" id="loading">
+                <div class="spinner"></div>
+                <p>Analyzing using TAQA historical patterns...</p>
+            </div>
+
+            <div class="error" id="error"></div>
+
+            <div class="result-container" id="resultContainer">
+                <div class="priority-badge" id="priorityBadge"></div>
+                <span class="method-badge" id="methodBadge"></span>
+                <h3>Priority Score</h3>
+                <p style="font-size:1.3em;"><span id="priorityScore"></span> <span style="font-size:0.9em;opacity:0.7;">(1.0 = Low, 4.0 = High)</span></p>
+                <div class="confidence-bar">
+                    <div class="confidence-fill" id="confidenceFill"></div>
+                </div>
+                <div id="scoreExplanation" style="margin-top:15px;font-size:1.1em;"></div>
+                <div id="methodExplanation" style="margin-top:10px;font-size:1.0em;opacity:0.9;"></div>
+                <div style="margin-top:10px;">
+                    <span style="font-size:0.9em;opacity:0.8;">Confidence: <span id="confidenceLevel" style="font-weight:600;"></span></span>
+                </div>
+                <div style="margin-top: 20px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.2);">
+                    <h4>Input Summary</h4>
+                    <p><strong>Description:</strong> <span id="inputDescription"></span></p>
+                    <p><strong>Equipment:</strong> <span id="inputEquipment"></span></p>
+                    <p><strong>Section:</strong> <span id="inputSection"></span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Example data based on TAQA patterns
+        const examples = {
+            high: {
+                description: "Maintenance requise pour évents ballon chaudière - contrôle étanchéité",
+                equipment_type: "évents ballon chaudière",
+                section: "34MC"
+            },
+            medium: {
+                description: "Contrôle routine ventilateur de souflage - vérification vibrations",
+                equipment_type: "Ventilateur de souflage A",
+                section: "34MC"
+            },
+            low: {
+                description: "Nettoyage général équipements électriques secondaires",
+                equipment_type: "Electrofiltre",
+                section: "34EL"
+            }
+        };
+
+        function loadExample(type) {
+            const example = examples[type];
+            document.getElementById('description').value = example.description;
+            document.getElementById('equipment_type').value = example.equipment_type;
+            document.getElementById('section').value = example.section;
+        }
+
+        document.getElementById('anomalyForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const submitBtn = document.getElementById('submitBtn');
+            const loading = document.getElementById('loading');
+            const error = document.getElementById('error');
+            const resultContainer = document.getElementById('resultContainer');
+            
+            // Show loading
+            submitBtn.disabled = true;
+            loading.style.display = 'block';
+            error.style.display = 'none';
+            resultContainer.style.display = 'none';
+            
+            // Prepare data (no status or date needed)
+            const formData = {
+                description: document.getElementById('description').value,
+                equipment_type: document.getElementById('equipment_type').value,
+                section: document.getElementById('section').value
+            };
+            
+            try {
+                const response = await fetch('/predict', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(formData)
+                });
+                
+                const result = await response.json();
+                
+                if (result.error) {
+                    throw new Error(result.error);
+                }
+                
+                // Display result
+                displayResult(result, formData);
+                
+            } catch (err) {
+                error.textContent = `Error: ${err.message}`;
+                error.style.display = 'block';
+            } finally {
+                submitBtn.disabled = false;
+                loading.style.display = 'none';
+            }
+        });
+
+        function displayResult(result, inputData) {
+            const resultContainer = document.getElementById('resultContainer');
+            const priorityBadge = document.getElementById('priorityBadge');
+            const methodBadge = document.getElementById('methodBadge');
+            const priorityScore = document.getElementById('priorityScore');
+            const confidenceFill = document.getElementById('confidenceFill');
+            const scoreExplanation = document.getElementById('scoreExplanation');
+            const methodExplanation = document.getElementById('methodExplanation');
+            const confidenceLevel = document.getElementById('confidenceLevel');
+
+            // Set color class based on score
+            let score = result.priority_score;
+            let badgeText = `Priority: ${score}`;
+            let badgeClass = '';
+            let explanation = '';
+            
+            if (score >= 3.0) {
+                badgeClass = 'result-high';
+                explanation = 'High priority - Critical equipment or important maintenance';
+            } else if (score >= 2.0) {
+                badgeClass = 'result-medium';
+                explanation = 'Medium priority - Standard maintenance and monitoring';
+            } else {
+                badgeClass = 'result-low';
+                explanation = 'Low priority - Minor issues or routine tasks';
+            }
+            
+            resultContainer.className = `result-container ${badgeClass}`;
+            priorityBadge.textContent = badgeText;
+            methodBadge.textContent = result.method || 'Lookup';
+            priorityScore.textContent = score;
+            confidenceFill.style.width = `${((score-1)/3)*100}%`;
+            scoreExplanation.textContent = explanation;
+            
+            // Set method information
+            if (result.explanation) {
+                methodExplanation.textContent = result.explanation;
+            }
+            if (result.confidence) {
+                confidenceLevel.textContent = result.confidence;
+            }
+            
+            // Set input summary
+            document.getElementById('inputDescription').textContent = inputData.description;
+            document.getElementById('inputEquipment').textContent = inputData.equipment_type || 'Not specified';
+            document.getElementById('inputSection').textContent = inputData.section || 'Not specified';
+            
+            // Show result
+            resultContainer.style.display = 'block';
+            resultContainer.scrollIntoView({ behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
