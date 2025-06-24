@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TAQA Anomaly Priority Classifier - Lookup System</title>
+    <title>TAQA Anomaly Priority Classifier - Hybrid System</title>
     <style>
         * {
             margin: 0;
@@ -19,7 +19,7 @@
         }
 
         .container {
-            max-width: 800px;
+            max-width: 900px;
             margin: 0 auto;
             background: white;
             border-radius: 15px;
@@ -53,6 +53,30 @@
             font-size: 0.9em;
             margin-top: 10px;
             display: inline-block;
+        }
+
+        .ml-info {
+            background: rgba(255,255,255,0.1);
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 15px;
+            font-size: 0.9em;
+        }
+
+        .ml-models {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 10px;
+            justify-content: center;
+        }
+
+        .model-tag {
+            background: rgba(255,255,255,0.2);
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 0.7em;
+            font-weight: 500;
         }
 
         .form-container {
@@ -227,34 +251,77 @@
             color: #666;
             margin-top: 5px;
         }
+
+        .model-contributions {
+            margin-top: 15px;
+            padding: 10px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 8px;
+            font-size: 0.9em;
+        }
+
+        .contribution-item {
+            display: flex;
+            justify-content: space-between;
+            margin: 5px 0;
+        }
+
+        .feature-analysis {
+            margin-top: 15px;
+            padding: 10px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 8px;
+            font-size: 0.9em;
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="header">
-            <h1> TAQA Anomaly Classifier</h1>
-            <div class="accuracy-badge">82% Accuracy  Lookup-Based System</div>
+            <h1>TAQA Hybrid Classifier</h1>
+            <p>Intelligent Hybrid System: Lookup Reliability + ML Flexibility</p>
+            <div class="accuracy-badge">82% LookUp + 67.8% ML wla m9awed</div>
+            <div class="ml-info">
+                <div>Smart routing: Historical data for known equipment, ML for unknown cases</div>
+                <div class="ml-models">
+                    <span class="model-tag">Lookup System</span>
+                    <span class="model-tag">Random Forest</span>
+                    <span class="model-tag">Extra Trees</span>
+                    <span class="model-tag">Gradient Boosting</span>
+                    <span class="model-tag">Smart Routing</span>
+                    <span class="model-tag">Confidence-Based</span>
+                </div>
+            </div>
         </div>
 
         <div class="form-container">
-
+            <div class="info-section">
+                <h3>Hybrid System Features</h3>
+                <ul style="margin-top: 10px; padding-left: 20px;">
+                    <li><strong>Smart Routing:</strong> Uses lookup for known equipment (82% accuracy), ML for unknowns (67.8%)</li>
+                    <li><strong>Historical Data:</strong> 4000+ equipment records with proven TAQA priorities</li>
+                    <li><strong>ML Fallback:</strong> Advanced ensemble for new or unknown equipment types</li>
+                    <li><strong>Confidence-Based:</strong> Automatic selection of best prediction method</li>
+                    <li><strong>Domain Intelligence:</strong> TAQA-specific keywords and equipment criticality</li>
+                </ul>
+            </div>
 
             <form id="anomalyForm">
                 <div class="form-group">
                     <label for="description">Anomaly Description *</label>
                     <textarea id="description" name="description" required 
                               placeholder="Describe the anomaly in detail (French text preferred)..."></textarea>
-                    <button type="button" class="example-btn" onclick="loadExample('high')">Critical Equipment</button>
-                    <button type="button" class="example-btn" onclick="loadExample('medium')">Standard Maintenance</button>
-                    <button type="button" class="example-btn" onclick="loadExample('low')">Minor Issue</button>
+                    <button type="button" class="example-btn" onclick="loadExample('high')">Critical Issue</button>
+                    <button type="button" class="example-btn" onclick="loadExample('medium')">Equipment Maintenance</button>
+                    <button type="button" class="example-btn" onclick="loadExample('low')">Routine Work</button>
                 </div>
 
                 <div class="form-group">
                     <label for="equipment_type">Equipment Type *</label>
                     <input type="text" id="equipment_type" name="equipment_type" required
-                           placeholder="e.g., MOTEUR POMPE ALIMENTAIRE, évents ballon chaudière, VENTILATEUR...">
+                           placeholder="e.g., POMPE ALIMENTAIRE PRINCIPALE, ALTERNATEUR UNITE 1...">
                     <div class="equipment-suggestions">
-                         Tip: Use exact equipment names from TAQA system for best accuracy
+                        Hybrid system checks lookup first, then uses ML for unknown equipment
                     </div>
                 </div>
 
@@ -262,23 +329,23 @@
                     <label for="section">Section/Department *</label>
                     <select id="section" name="section" required>
                         <option value="">Select Section</option>
-                        <option value="34MD">34MD - Mechanical Maintenance (Highest avg: 2.00)</option>
-                        <option value="34MC">34MC - Mechanical (Avg: 1.97)</option>
-                        <option value="34MG">34MG - Mechanical General (Avg: 1.96)</option>
-                        <option value="34CT">34CT - Control (Avg: 1.93)</option>
-                        <option value="34MM">34MM - Mechanical Maintenance (Avg: 1.91)</option>
-                        <option value="34EL">34EL - Electrical (Avg: 1.91)</option>
+                        <option value="34MC">34MC - Mechanical Coal</option>
+                        <option value="34EL">34EL - Electrical</option>
+                        <option value="34CT">34CT - Control</option>
+                        <option value="34MD">34MD - Mechanical Diesel</option>
+                        <option value="34MM">34MM - Mechanical Maintenance</option>
+                        <option value="34MG">34MG - Mechanical General</option>
                     </select>
                 </div>
 
                 <button type="submit" class="btn" id="submitBtn">
-                     Get Priority Score
+                    Analyze with Hybrid System
                 </button>
             </form>
 
             <div class="loading" id="loading">
                 <div class="spinner"></div>
-                <p>Analyzing using TAQA historical patterns...</p>
+                <p>Processing with hybrid system...</p>
             </div>
 
             <div class="error" id="error"></div>
@@ -286,16 +353,27 @@
             <div class="result-container" id="resultContainer">
                 <div class="priority-badge" id="priorityBadge"></div>
                 <span class="method-badge" id="methodBadge"></span>
-                <h3>Priority Score</h3>
-                <p style="font-size:1.3em;"><span id="priorityScore"></span> <span style="font-size:0.9em;opacity:0.7;">(1.0 = Low, 4.0 = High)</span></p>
+                <h3>Hybrid Priority Prediction</h3>
+                <p style="font-size:1.3em;"><span id="priorityScore"></span> <span style="font-size:0.9em;opacity:0.7;">(1.0 = Low, 5.0 = Critical)</span></p>
                 <div class="confidence-bar">
                     <div class="confidence-fill" id="confidenceFill"></div>
                 </div>
                 <div id="scoreExplanation" style="margin-top:15px;font-size:1.1em;"></div>
                 <div id="methodExplanation" style="margin-top:10px;font-size:1.0em;opacity:0.9;"></div>
                 <div style="margin-top:10px;">
-                    <span style="font-size:0.9em;opacity:0.8;">Confidence: <span id="confidenceLevel" style="font-weight:600;"></span></span>
+                    <span style="font-size:0.9em;opacity:0.8;">System Confidence: <span id="confidenceLevel" style="font-weight:600;"></span></span>
                 </div>
+                
+                <div class="feature-analysis" id="featureAnalysis" style="display:none;">
+                    <h4>System Analysis</h4>
+                    <div id="featureDetails"></div>
+                </div>
+                
+                <div class="model-contributions" id="modelContributions" style="display:none;">
+                    <h4>Method Used</h4>
+                    <div id="contributionDetails"></div>
+                </div>
+                
                 <div style="margin-top: 20px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.2);">
                     <h4>Input Summary</h4>
                     <p><strong>Description:</strong> <span id="inputDescription"></span></p>
@@ -307,21 +385,21 @@
     </div>
 
     <script>
-        // Example data based on TAQA patterns
+        // Example data showcasing ML capabilities
         const examples = {
             high: {
-                description: "Maintenance requise pour évents ballon chaudière - contrôle étanchéité",
-                equipment_type: "évents ballon chaudière",
+                description: "URGENT: Fuite importante de vapeur par tresse pompe alimentaire - arrêt immédiat requis pour sécurité",
+                equipment_type: "POMPE ALIMENTAIRE PRINCIPALE",
                 section: "34MC"
             },
             medium: {
-                description: "Contrôle routine ventilateur de souflage - vérification vibrations",
-                equipment_type: "Ventilateur de souflage A",
-                section: "34MC"
+                description: "Défaut alternateur unité - vibrations anormales détectées lors contrôle routine",
+                equipment_type: "ALTERNATEUR UNITE 1",
+                section: "34EL"
             },
             low: {
-                description: "Nettoyage général équipements électriques secondaires",
-                equipment_type: "Electrofiltre",
+                description: "Prévoir contrôle préventif éclairage salle technique - amélioration générale",
+                equipment_type: "ECLAIRAGE SALLE TECHNIQUE",
                 section: "34EL"
             }
         };
@@ -347,7 +425,7 @@
             error.style.display = 'none';
             resultContainer.style.display = 'none';
             
-            // Prepare data (no status or date needed)
+            // Prepare data
             const formData = {
                 description: document.getElementById('description').value,
                 equipment_type: document.getElementById('equipment_type').value,
@@ -397,22 +475,25 @@
             let badgeClass = '';
             let explanation = '';
             
-            if (score >= 3.0) {
+            if (score >= 4.0) {
                 badgeClass = 'result-high';
-                explanation = 'High priority - Critical equipment or important maintenance';
+                explanation = 'Critical Priority - Immediate action required';
+            } else if (score >= 3.0) {
+                badgeClass = 'result-high';
+                explanation = 'High Priority - Urgent attention needed';
             } else if (score >= 2.0) {
                 badgeClass = 'result-medium';
-                explanation = 'Medium priority - Standard maintenance and monitoring';
+                explanation = 'Medium Priority - Schedule maintenance';
             } else {
                 badgeClass = 'result-low';
-                explanation = 'Low priority - Minor issues or routine tasks';
+                explanation = 'Low Priority - Routine or preventive work';
             }
             
             resultContainer.className = `result-container ${badgeClass}`;
             priorityBadge.textContent = badgeText;
-            methodBadge.textContent = result.method || 'Lookup';
+            methodBadge.textContent = result.method || 'Advanced ML';
             priorityScore.textContent = score;
-            confidenceFill.style.width = `${((score-1)/3)*100}%`;
+            confidenceFill.style.width = `${Math.min(100, ((score-1)/4)*100)}%`;
             scoreExplanation.textContent = explanation;
             
             // Set method information
@@ -420,7 +501,43 @@
                 methodExplanation.textContent = result.explanation;
             }
             if (result.confidence) {
-                confidenceLevel.textContent = result.confidence;
+                confidenceLevel.textContent = `${(result.confidence * 100).toFixed(1)}%`;
+            }
+            
+            // Feature analysis
+            if (result.feature_analysis) {
+                const featureAnalysis = document.getElementById('featureAnalysis');
+                const featureDetails = document.getElementById('featureDetails');
+                const features = result.feature_analysis;
+                
+                let featuresHtml = '<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px;">';
+                featuresHtml += `<div>Safety Score: ${(features.safety_score * 100).toFixed(0)}%</div>`;
+                featuresHtml += `<div>Urgency Score: ${(features.urgency_score * 100).toFixed(0)}%</div>`;
+                featuresHtml += `<div>Technical Score: ${(features.technical_score * 100).toFixed(0)}%</div>`;
+                featuresHtml += `<div>Overall Complexity: ${score.toFixed(1)}/5.0</div>`;
+                featuresHtml += '</div>';
+                
+                featureDetails.innerHTML = featuresHtml;
+                featureAnalysis.style.display = 'block';
+            }
+            
+            // Model contributions
+            if (result.model_contributions) {
+                const modelContributions = document.getElementById('modelContributions');
+                const contributionDetails = document.getElementById('contributionDetails');
+                const contributions = result.model_contributions;
+                
+                let contributionsHtml = '';
+                for (const [model, data] of Object.entries(contributions)) {
+                    const percentage = (data.weight * 100).toFixed(1);
+                    contributionsHtml += `<div class="contribution-item">
+                        <span>${model}</span>
+                        <span>${data.prediction.toFixed(2)} (${percentage}%)</span>
+                    </div>`;
+                }
+                
+                contributionDetails.innerHTML = contributionsHtml;
+                modelContributions.style.display = 'block';
             }
             
             // Set input summary

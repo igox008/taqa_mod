@@ -1,0 +1,20 @@
+{
+  "model_name": "Improved Balanced TAQA Model",
+  "model_type": "Balanced ensemble with intelligent features",
+  "features_count": 217,
+  "training_approach": "Balanced dataset with domain-specific features",
+  "ensemble_mae": 0.35797601081656627,
+  "ensemble_mse": 0.21415417664990194,
+  "ensemble_r2": 0.7312575038118878,
+  "accuracy_05": 67.8125,
+  "accuracy_03": 53.28125,
+  "improvements": [
+    "Balanced training dataset",
+    "Priority-specific features",
+    "Equipment criticality analysis",
+    "Smart text feature extraction",
+    "Sample weighting for remaining imbalance",
+    "Domain knowledge integration"
+  ],
+  "created_date": "2025-06-24T22:18:24.477974"
+}

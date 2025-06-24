@@ -1,0 +1,28 @@
+{
+  "model_name": "Advanced TAQA Ensemble",
+  "model_type": "Ensemble of Random Forest, Extra Trees, Gradient Boosting, Neural Network, SVR, Elastic Net",
+  "features_count": 877,
+  "training_samples": 4086,
+  "ensemble_mae": 0.21832896140450955,
+  "ensemble_mse": 0.1458344027666357,
+  "ensemble_r2": 0.21551504621130224,
+  "accuracy_05": 83.86308068459658,
+  "accuracy_03": 80.440097799511,
+  "accuracy_02": 76.16136919315404,
+  "priority_range": [
+    1.0,
+    5.0
+  ],
+  "created_date": "2025-06-24T21:08:48.698608",
+  "techniques_used": [
+    "Advanced text feature engineering",
+    "Temporal feature extraction",
+    "Equipment criticality analysis",
+    "Multiple text vectorization approaches",
+    "Polynomial feature interactions",
+    "Feature selection",
+    "Ensemble modeling with weighted voting",
+    "Robust scaling",
+    "Cross-validation"
+  ]
+}
