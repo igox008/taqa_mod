@@ -22,7 +22,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 # Copy application files
 COPY app.py .
-COPY taqa_lookup_api.py .
+COPY standalone_taqa_api.py .
 COPY taqa_priority_lookup.json .
 COPY templates/ ./templates/
 
