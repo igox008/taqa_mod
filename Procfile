@@ -1,1 +1,0 @@
-web: python startup_check.py && gunicorn --bind 0.0.0.0:$PORT app:app 

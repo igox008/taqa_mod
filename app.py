@@ -1,442 +1,151 @@
-# Advanced ML deployment configuration for TAQA Anomaly Classifier
-# Production-ready Flask app with state-of-the-art ensemble ML model
+#!/usr/bin/env python3
+"""
+Web interface for Equipment Parameter Predictor
+"""
 
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, request, render_template, jsonify
+from equipment_anomaly_predictor_fast import FastParameterPredictor, SmartParameterPredictor
+import pandas as pd
+from datetime import datetime
 import os
-import sys
-from pathlib import Path
+import joblib
+import traceback
+import logging
+from dotenv import load_dotenv
+
+# Load environment variables
+load_dotenv()
+
+# Configure logging
+logging.basicConfig(level=logging.DEBUG)
+logger = logging.getLogger(__name__)
 
 app = Flask(__name__)
 
-# Initialize the advanced ML classifier API
-classifier_api = None
+# Initialize the predictors
+logger.info("Loading model components...")
+try:
+    fast_predictor = FastParameterPredictor()
+    fast_predictor.load_model('models/parameter_predictor.joblib')
+    smart_predictor = SmartParameterPredictor()
+    logger.info("Models loaded successfully")
+except Exception as e:
+    logger.error(f"Error loading models: {str(e)}")
+    logger.error(traceback.format_exc())
+    raise
 
-def initialize_classifier():
-    """Initialize the classifier with the advanced ML ensemble model"""
-    global classifier_api
+# Get available sections from CSV
+try:
+    data = pd.read_csv('data_set.csv')
+    AVAILABLE_SECTIONS = sorted(data['Section propriétaire'].unique())
     
-    try:
-        # Use the standalone system (no external files needed)
-        from standalone_taqa_api import StandaloneTAQAAPI
-        classifier_api = StandaloneTAQAAPI()
-        print("✅ TAQA Standalone System loaded successfully!")
-        print("🎯 Built-in data + Smart analysis - 100% reliable!")
-        print("🤖 Using: Standalone system with built-in TAQA data")
-        return True
-    except Exception as e:
-        print(f"❌ Error loading advanced ML model: {e}")
-        print("Make sure advanced_taqa_model.joblib exists")
-        print("Run 'python advanced_ml_model.py' to train the model first")
-        return False
+    # Filter out NaN values and empty strings before sorting equipment types
+    equipment_series = data['Description de l\'équipement']
+    AVAILABLE_EQUIPMENT = sorted(equipment_series[equipment_series.notna() & (equipment_series != '')].unique())
+    
+    logger.info(f"Loaded {len(AVAILABLE_SECTIONS)} sections and {len(AVAILABLE_EQUIPMENT)} equipment types")
+except Exception as e:
+    logger.error(f"Error loading categories: {str(e)}")
+    logger.error(traceback.format_exc())
+    raise
 
 @app.route('/')
-def index():
-    """Main page with the anomaly classification form"""
-    return render_template('index.html')
+def home():
+    return render_template('index.html', sections=AVAILABLE_SECTIONS, equipment_types=AVAILABLE_EQUIPMENT)  # Add equipment_types
+
+def get_severity_level(total_score):
+    """Determine severity level based on total score"""
+    if total_score <= 7:
+        return "MINEUR - Maintenance de routine"
+    elif total_score <= 9:
+        return "MODÉRÉ - Planifier intervention"
+    else:
+        return "CRITIQUE - Intervention immédiate requise"
 
 @app.route('/predict', methods=['POST'])
 def predict():
-    """API endpoint for making predictions using advanced ML ensemble"""
     try:
         data = request.get_json()
+        logger.info(f"Received prediction request with data: {data}")
         
-        if classifier_api is None:
-            return jsonify({'error': 'Advanced ML model not loaded'}), 500
+        # Validate input data
+        required_fields = ['description', 'equipment_type', 'section']
+        for field in required_fields:
+            if field not in data:
+                logger.warning(f"Missing required field: {field}")
+                return jsonify({
+                    'error': f'Missing required field: {field}'
+                }), 400
         
-        # Extract the relevant data
-        description = data.get('description', '')
-        equipment_type = data.get('equipment_type', '')
-        section = data.get('section', '')
+        # Validate text fields are not empty
+        if not data['description'].strip():
+            return jsonify({'error': 'Description cannot be empty'}), 400
+        if not data['equipment_type'].strip():
+            return jsonify({'error': 'Equipment type cannot be empty'}), 400
+        if not data['section'].strip():
+            return jsonify({'error': 'Section cannot be empty'}), 400
+            
+        # Make predictions with both models
+        logger.debug("Making predictions with parameters:")
+        logger.debug(f"Description: {data['description']}")
+        logger.debug(f"Equipment: {data['equipment_type']}")
+        logger.debug(f"Section: {data['section']}")
         
-        # Make prediction using advanced ML ensemble
-        result = classifier_api.predict_single(
-            description=description,
-            equipment_type=equipment_type,
-            section=section
+        # Get predictions from both models
+        fast_result = fast_predictor.predict(
+            description=data['description'],
+            equipment_type=data['equipment_type'],
+            section=data['section']
         )
         
-        return jsonify(result)
-        
-    except Exception as e:
-        return jsonify({'error': str(e)}), 500
-
-@app.route('/health')
-def health():
-    """Health check endpoint"""
-    if classifier_api is None:
-        return jsonify({'status': 'unhealthy', 'error': 'Advanced ML model not loaded'}), 500
-    
-    return jsonify({
-        'status': 'healthy',
-        'model': 'Simple Reliable System',
-        'lookup_accuracy': '82%',
-        'text_analysis': 'Smart keyword detection',
-        'approach': 'Reliable and fast',
-        'techniques': [
-            'Historical data lookup for known equipment',
-            'Smart text analysis with keywords',
-            'Section-based modifiers',
-            'Equipment criticality analysis',
-            'No heavy ML dependencies',
-            'Always works - guaranteed'
-        ]
-    })
-
-@app.route('/model_info')
-def model_info():
-    """Get advanced ML model information"""
-    if classifier_api is None:
-        return jsonify({'error': 'Advanced ML model not loaded'}), 500
-    
-    try:
-        # Return hybrid system info
-        return jsonify({
-            'model_name': 'TAQA Hybrid Prediction System',
-            'model_type': 'Lookup + ML Ensemble',
-            'lookup_accuracy': '82%',
-            'ml_accuracy': '67.8%',
-            'strategy': 'Use lookup for known equipment, ML for unknowns',
-            'features': [
-                'Equipment-based historical lookup',
-                'Section-based averages',
-                'Smart text feature extraction',
-                'Domain-specific keywords',
-                'Ensemble ML prediction',
-                'Confidence-based routing'
-            ]
-        })
-    except Exception as e:
-        return jsonify({'error': str(e)}), 500
-
-@app.route('/equipment_types')
-def equipment_types():
-    """Get known equipment types for autocomplete"""
-    # Common TAQA equipment types for autocomplete
-    equipment_list = [
-        "POMPE ALIMENTAIRE PRINCIPALE",
-        "ALTERNATEUR UNITE 1",
-        "ALTERNATEUR UNITE 2", 
-        "MOTEUR VENTILATEUR",
-        "CHAUDIERE PRINCIPALE",
-        "TRANSFORMATEUR",
-        "VENTILATEUR TIRAGE FORCE",
-        "POMPE EAU CIRCULATION",
-        "VANNE REGULATION",
-        "SERVOMOTEUR",
-        "RAMONEUR LONG RETRACTABLE",
-        "DECRASSEUR",
-        "SOUPAPE SECURITE",
-        "DETECTEUR NIVEAU",
-        "ECLAIRAGE",
-        "ARMOIRE ELECTRIQUE",
-        "CABLE ALIMENTATION",
-        "PRISE COURANT"
-    ]
-    
-    return jsonify({'equipment_types': sorted(equipment_list)})
-
-@app.route('/sections')
-def sections():
-    """Get known sections for autocomplete"""
-    sections_list = [
-        "34MC",  # Mechanical Coal
-        "34EL",  # Electrical
-        "34CT",  # Control
-        "34MD",  # Mechanical Diesel
-        "34MM",  # Mechanical Maintenance
-        "34MG"   # Mechanical General
-    ]
-    
-    return jsonify({'sections': sections_list})
-
-@app.route('/api/v1/calculate_priority', methods=['POST'])
-def calculate_priority():
-    """
-    Dedicated API endpoint for anomaly priority calculation
-    
-    Expected JSON payload:
-    {
-        "description": "Description of the anomaly in French",
-        "equipment": "Equipment type (e.g., POMPE, ALTERNATEUR)",
-        "department": "Department/section code (e.g., 34MC, 34EL)"
-    }
-    
-    Returns:
-    {
-        "priority_score": 2.5,
-        "priority_label": "Medium Priority",
-        "confidence": 0.85,
-        "method": "Equipment Lookup",
-        "explanation": "Based on historical data for pump equipment",
-        "color": "#ffa500",
-        "urgency": "Normal",
-        "processing_time_ms": 12
-    }
-    """
-    import time
-    start_time = time.time()
-    
-    try:
-        # Validate request
-        if not request.is_json:
-            return jsonify({
-                'error': 'Content-Type must be application/json',
-                'status': 'error'
-            }), 400
-        
-        data = request.get_json()
-        
-        if not data:
-            return jsonify({
-                'error': 'Empty JSON payload',
-                'status': 'error'
-            }), 400
-        
-        # Extract and validate required fields
-        description = data.get('description', '').strip()
-        equipment = data.get('equipment', '').strip()
-        department = data.get('department', '').strip()
-        
-        # At least description is required
-        if not description:
-            return jsonify({
-                'error': 'Description field is required',
-                'status': 'error',
-                'required_fields': ['description'],
-                'optional_fields': ['equipment', 'department']
-            }), 400
-        
-        if classifier_api is None:
-            return jsonify({
-                'error': 'TAQA classifier not initialized',
-                'status': 'error'
-            }), 500
-        
-        # Make prediction using the TAQA system
-        result = classifier_api.predict_single(
-            description=description,
-            equipment_type=equipment,
-            section=department
+        smart_result = smart_predictor.predict(
+            description=data['description'],
+            equipment_type=data['equipment_type'],
+            section=data['section']
         )
         
-        # Calculate processing time
-        processing_time = round((time.time() - start_time) * 1000, 2)
+        logger.info(f"Fast predictor result: {fast_result}")
+        logger.info(f"Smart predictor result: {smart_result}")
         
-        # Enhance result with additional metadata
-        enhanced_result = {
-            'status': 'success',
-            'priority_score': result.get('priority_score'),
-            'priority_label': result.get('priority_label'),
-            'confidence': result.get('confidence'),
-            'method': result.get('method'),
-            'explanation': result.get('explanation'),
-            'color': result.get('color'),
-            'urgency': result.get('urgency'),
-            'processing_time_ms': processing_time,
-            'input_data': {
-                'description': description,
-                'equipment': equipment,
-                'department': department
+        # Calculate criticality for both predictions (only numeric values)
+        fast_criticality = fast_result['Fiabilité'] + fast_result['Disponibilité'] + fast_result['Process Safety']
+        smart_criticality = smart_result['Fiabilité'] + smart_result['Disponibilité'] + smart_result['Process Safety']
+        
+        # Format response with new severity levels
+        response = {
+            'smart_predictor': {
+                'predictions': {
+                    'Fiabilité': smart_result['Fiabilité'],
+                    'Disponibilité': smart_result['Disponibilité'],
+                    'Process Safety': smart_result['Process Safety']
+                },
+                'criticality': smart_criticality,
+                'severity_level': get_severity_level(smart_criticality)
             },
-            'timestamp': time.strftime('%Y-%m-%d %H:%M:%S UTC', time.gmtime())
+            'fast_predictor': {
+                'predictions': {
+                    'Fiabilité': fast_result['Fiabilité'],
+                    'Disponibilité': fast_result['Disponibilité'],
+                    'Process Safety': fast_result['Process Safety']
+                },
+                'criticality': fast_criticality,
+                'severity_level': get_severity_level(fast_criticality)
+            },
+            'timestamp': datetime.now().isoformat()
         }
-        
-        return jsonify(enhanced_result)
+            
+        logger.info(f"Sending response: {response}")
+        return jsonify(response)
         
     except Exception as e:
-        processing_time = round((time.time() - start_time) * 1000, 2)
+        logger.error("Error in prediction:")
+        logger.error(str(e))
+        logger.error(traceback.format_exc())
         return jsonify({
-            'error': str(e),
-            'status': 'error',
-            'processing_time_ms': processing_time,
-            'timestamp': time.strftime('%Y-%m-%d %H:%M:%S UTC', time.gmtime())
+            'error': 'An error occurred while processing the prediction',
+            'details': str(e),
+            'traceback': traceback.format_exc()
         }), 500
 
-@app.route('/api/v1/batch_calculate', methods=['POST'])
-def batch_calculate_priority():
-    """
-    Batch API endpoint for multiple anomaly priority calculations
-    
-    Expected JSON payload:
-    {
-        "anomalies": [
-            {
-                "id": "unique_id_1",
-                "description": "Pump making noise",
-                "equipment": "POMPE",
-                "department": "34MC"
-            },
-            {
-                "id": "unique_id_2", 
-                "description": "Electrical fault",
-                "equipment": "ALTERNATEUR",
-                "department": "34EL"
-            }
-        ]
-    }
-    """
-    import time
-    start_time = time.time()
-    
-    try:
-        if not request.is_json:
-            return jsonify({
-                'error': 'Content-Type must be application/json',
-                'status': 'error'
-            }), 400
-        
-        data = request.get_json()
-        anomalies = data.get('anomalies', [])
-        
-        if not anomalies or not isinstance(anomalies, list):
-            return jsonify({
-                'error': 'anomalies field must be a non-empty array',
-                'status': 'error'
-            }), 400
-        
-        if len(anomalies) > 100:  # Limit batch size
-            return jsonify({
-                'error': 'Maximum 100 anomalies per batch',
-                'status': 'error'
-            }), 400
-        
-        if classifier_api is None:
-            return jsonify({
-                'error': 'TAQA classifier not initialized',
-                'status': 'error'
-            }), 500
-        
-        results = []
-        errors = []
-        
-        for i, anomaly in enumerate(anomalies):
-            try:
-                # Extract data
-                anomaly_id = anomaly.get('id', f'anomaly_{i+1}')
-                description = anomaly.get('description', '').strip()
-                equipment = anomaly.get('equipment', '').strip()
-                department = anomaly.get('department', '').strip()
-                
-                if not description:
-                    errors.append({
-                        'id': anomaly_id,
-                        'error': 'Description is required',
-                        'index': i
-                    })
-                    continue
-                
-                # Make prediction
-                result = classifier_api.predict_single(
-                    description=description,
-                    equipment_type=equipment,
-                    section=department
-                )
-                
-                # Add to results
-                results.append({
-                    'id': anomaly_id,
-                    'status': 'success',
-                    'priority_score': result.get('priority_score'),
-                    'priority_label': result.get('priority_label'),
-                    'confidence': result.get('confidence'),
-                    'method': result.get('method'),
-                    'explanation': result.get('explanation'),
-                    'color': result.get('color'),
-                    'urgency': result.get('urgency')
-                })
-                
-            except Exception as e:
-                errors.append({
-                    'id': anomaly.get('id', f'anomaly_{i+1}'),
-                    'error': str(e),
-                    'index': i
-                })
-        
-        processing_time = round((time.time() - start_time) * 1000, 2)
-        
-        return jsonify({
-            'status': 'completed',
-            'total_processed': len(anomalies),
-            'successful': len(results),
-            'failed': len(errors),
-            'results': results,
-            'errors': errors,
-            'processing_time_ms': processing_time,
-            'timestamp': time.strftime('%Y-%m-%d %H:%M:%S UTC', time.gmtime())
-        })
-        
-    except Exception as e:
-        processing_time = round((time.time() - start_time) * 1000, 2)
-        return jsonify({
-            'error': str(e),
-            'status': 'error',
-            'processing_time_ms': processing_time,
-            'timestamp': time.strftime('%Y-%m-%d %H:%M:%S UTC', time.gmtime())
-        }), 500
-
-@app.route('/api/v1/info', methods=['GET'])
-def api_info():
-    """API information and documentation endpoint"""
-    return jsonify({
-        'api_name': 'TAQA Anomaly Priority Calculator',
-        'version': '1.0',
-        'status': 'active',
-        'endpoints': {
-            '/api/v1/calculate_priority': {
-                'method': 'POST',
-                'description': 'Calculate priority for a single anomaly',
-                'required_fields': ['description'],
-                'optional_fields': ['equipment', 'department']
-            },
-            '/api/v1/batch_calculate': {
-                'method': 'POST', 
-                'description': 'Calculate priorities for multiple anomalies',
-                'max_batch_size': 100
-            },
-            '/api/v1/info': {
-                'method': 'GET',
-                'description': 'API documentation and information'
-            }
-        },
-        'supported_departments': [
-            '34MC - Mechanical Coal',
-            '34EL - Electrical', 
-            '34CT - Control',
-            '34MD - Mechanical Diesel',
-            '34MM - Mechanical Maintenance',
-            '34MG - Mechanical General'
-        ],
-        'priority_scale': {
-            '1.0-2.0': 'Low Priority (Green)',
-            '2.0-3.0': 'Medium Priority (Orange)', 
-            '3.0-4.0': 'High Priority (Red)',
-            '4.0+': 'Critical Priority (Dark Red)'
-        },
-        'accuracy': {
-            'known_equipment': '82%',
-            'text_analysis': '67.8%',
-            'overall_system': '75%+'
-        }
-    })
-
-# Initialize classifier on startup
-classifier_loaded = initialize_classifier()
-
-# Production configuration
 if __name__ == '__main__':
-    if not classifier_loaded:
-        print("❌ Failed to initialize advanced ML model.")
-        print("💡 Run 'python advanced_ml_model.py' to train the model first.")
-        sys.exit(1)
-    
-    # Production settings
-    port = int(os.environ.get('PORT', 8000))
-    debug = os.environ.get('FLASK_DEBUG', 'False').lower() == 'true'
-    
-    print("🚀 TAQA Anomaly Classifier - Hybrid System Production")
-    print("🎯 Intelligent hybrid: 82% lookup + 67.8% ML accuracy")
-    print("🤖 Best of both worlds: Reliability + Flexibility")
-    print(f"🌐 Starting on port {port}")
-    print("=" * 70)
-    
-    app.run(host='0.0.0.0', port=port, debug=debug) 
+    app.run(debug=True) 

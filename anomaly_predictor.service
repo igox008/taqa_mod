@@ -1,0 +1,13 @@
+[Unit]
+Description=Anomaly Predictor Web Application
+After=network.target
+
+[Service]
+User=www-data
+Group=www-data
+WorkingDirectory=/var/www/anomaly_predictor
+Environment="PATH=/var/www/anomaly_predictor/venv/bin"
+ExecStart=/var/www/anomaly_predictor/venv/bin/gunicorn -c gunicorn_config.py app:app
+
+[Install]
+WantedBy=multi-user.target 

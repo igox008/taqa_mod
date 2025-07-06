@@ -1,554 +1,375 @@
-﻿<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html>
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TAQA Anomaly Priority Classifier - Hybrid System</title>
+    <title>Predictor</title>
+    <!-- Add Select2 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            padding: 20px;
-        }
-
-        .container {
-            max-width: 900px;
+            font-family: Arial, sans-serif;
+            max-width: 800px;
             margin: 0 auto;
-            background: white;
-            border-radius: 15px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-            overflow: hidden;
+            padding: 20px;
+            background-color: #f5f5f5;
         }
-
-        .header {
-            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
-            color: white;
-            padding: 30px;
-            text-align: center;
-        }
-
-        .header h1 {
-            font-size: 2.5em;
-            margin-bottom: 10px;
-        }
-
-        .header p {
-            font-size: 1.1em;
-            opacity: 0.9;
-        }
-
-        .accuracy-badge {
-            background: #27ae60;
-            color: white;
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-weight: 600;
-            font-size: 0.9em;
-            margin-top: 10px;
-            display: inline-block;
-        }
-
-        .ml-info {
-            background: rgba(255,255,255,0.1);
-            padding: 15px;
-            border-radius: 10px;
-            margin-top: 15px;
-            font-size: 0.9em;
-        }
-
-        .ml-models {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            margin-top: 10px;
-            justify-content: center;
-        }
-
-        .model-tag {
-            background: rgba(255,255,255,0.2);
-            padding: 4px 8px;
-            border-radius: 12px;
-            font-size: 0.7em;
-            font-weight: 500;
-        }
-
-        .form-container {
-            padding: 40px;
-        }
-
         .form-group {
-            margin-bottom: 25px;
+            margin-bottom: 15px;
+            background-color: white;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
-
         label {
             display: block;
-            margin-bottom: 8px;
-            font-weight: 600;
-            color: #2c3e50;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #333;
         }
-
-        input, textarea, select {
+        input[type="text"], select, textarea {
             width: 100%;
-            padding: 12px 15px;
-            border: 2px solid #e1e8ed;
-            border-radius: 8px;
-            font-size: 16px;
-            transition: border-color 0.3s ease;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
         }
-
-        input:focus, textarea:focus, select:focus {
-            outline: none;
-            border-color: #667eea;
-            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        select {
+            height: 35px;
+            background-color: white;
         }
-
-        textarea {
-            resize: vertical;
-            min-height: 100px;
-        }
-
-        .btn {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        button {
+            background-color: #4CAF50;
             color: white;
-            padding: 15px 30px;
+            padding: 12px 24px;
             border: none;
-            border-radius: 8px;
-            font-size: 16px;
-            font-weight: 600;
+            border-radius: 4px;
             cursor: pointer;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-            width: 100%;
+            font-size: 16px;
+            transition: background-color 0.3s;
         }
-
-        .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+        button:hover {
+            background-color: #45a049;
         }
-
-        .btn:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
-            transform: none;
-        }
-
-        .result-container {
-            margin-top: 30px;
-            padding: 25px;
-            border-radius: 10px;
+        #result {
+            margin-top: 20px;
+            padding: 20px;
+            border-radius: 8px;
+            background-color: white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
             display: none;
         }
-
-        .result-high {
-            background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
-            color: white;
+        .predictor-section {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border: 1px solid #e9ecef;
         }
-
-        .result-medium {
-            background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%);
-            color: white;
+        .predictor-section h3 {
+            color: #2c3e50;
+            margin-top: 0;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e9ecef;
         }
-
-        .result-low {
-            background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
-            color: white;
+        .predictor-section h4 {
+            color: #495057;
+            margin: 15px 0 10px;
         }
-
-        .priority-badge {
+        .severity-badge {
             display: inline-block;
             padding: 8px 16px;
             border-radius: 20px;
-            font-weight: 600;
-            font-size: 1.1em;
+            color: white;
+            font-weight: bold;
             margin-bottom: 15px;
         }
-
-        .method-badge {
-            background: rgba(255,255,255,0.2);
-            color: white;
-            padding: 4px 12px;
-            border-radius: 12px;
-            font-size: 0.8em;
-            margin-left: 10px;
+        .critical {
+            background-color: #dc3545;
         }
-
-        .confidence-bar {
-            background: rgba(255,255,255,0.2);
-            border-radius: 10px;
-            height: 20px;
-            margin: 10px 0;
-            overflow: hidden;
+        .high {
+            background-color: #fd7e14;
         }
-
-        .confidence-fill {
-            height: 100%;
-            background: rgba(255,255,255,0.8);
-            transition: width 0.5s ease;
+        .medium {
+            background-color: #ffc107;
+            color: #000;
         }
-
-        .loading {
-            display: none;
-            text-align: center;
-            padding: 20px;
+        .low {
+            background-color: #28a745;
         }
-
-        .spinner {
-            border: 4px solid #f3f3f3;
-            border-top: 4px solid #667eea;
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            animation: spin 1s linear infinite;
-            margin: 0 auto 15px;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        .error {
-            background: #e74c3c;
-            color: white;
-            padding: 15px;
-            border-radius: 8px;
-            margin-top: 20px;
-            display: none;
-        }
-
-        .example-btn {
-            background: #95a5a6;
-            color: white;
-            padding: 8px 15px;
-            border: none;
-            border-radius: 5px;
-            font-size: 14px;
-            cursor: pointer;
-            margin: 5px 5px 10px 0;
-            transition: background 0.3s ease;
-        }
-
-        .example-btn:hover {
-            background: #7f8c8d;
-        }
-
-        .info-section {
-            background: #f8f9fa;
-            padding: 20px;
-            border-left: 4px solid #667eea;
-            margin-bottom: 20px;
-            border-radius: 5px;
-        }
-
-        .equipment-suggestions {
-            font-size: 0.9em;
-            color: #666;
-            margin-top: 5px;
-        }
-
-        .model-contributions {
-            margin-top: 15px;
-            padding: 10px;
-            background: rgba(255,255,255,0.1);
-            border-radius: 8px;
-            font-size: 0.9em;
-        }
-
-        .contribution-item {
+        .info-row {
             display: flex;
             justify-content: space-between;
-            margin: 5px 0;
+            margin-bottom: 10px;
+            padding: 8px;
+            background-color: white;
+            border-radius: 4px;
+            border: 1px solid #e9ecef;
         }
-
-        .feature-analysis {
-            margin-top: 15px;
+        .info-label {
+            font-weight: bold;
+            color: #495057;
+        }
+        .parameter-score {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 4px;
+            color: white;
+            font-weight: bold;
+            margin-left: 10px;
+        }
+        .score-5 { background-color: #dc3545; }
+        .score-4 { background-color: #fd7e14; }
+        .score-3 { background-color: #ffc107; color: #000; }
+        .score-2 { background-color: #28a745; }
+        .score-1 { background-color: #17a2b8; }
+        .error-message {
+            color: #dc3545;
             padding: 10px;
-            background: rgba(255,255,255,0.1);
-            border-radius: 8px;
-            font-size: 0.9em;
+            margin: 10px 0;
+            border: 1px solid #dc3545;
+            border-radius: 4px;
+            display: none;
+        }
+        /* Add Select2 custom styles */
+        .select2-container {
+            width: 100% !important;
+        }
+        .select2-selection {
+            height: 35px !important;
+            border: 1px solid #ddd !important;
+            border-radius: 4px !important;
+        }
+        .select2-selection__rendered {
+            line-height: 35px !important;
+        }
+        .select2-selection__arrow {
+            height: 34px !important;
+        }
+        .select2-search__field {
+            padding: 8px !important;
+        }
+        .select2-results__option {
+            padding: 8px !important;
+        }
+        .select2-results__option--highlighted {
+            background-color: #4CAF50 !important;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <h1>TAQA Hybrid Classifier</h1>
-            <p>Intelligent Hybrid System: Lookup Reliability + ML Flexibility</p>
-            <div class="accuracy-badge">82% LookUp + 67.8% ML wla m9awed</div>
-            <div class="ml-info">
-                <div>Smart routing: Historical data for known equipment, ML for unknown cases</div>
-                <div class="ml-models">
-                    <span class="model-tag">Lookup System</span>
-                    <span class="model-tag">Random Forest</span>
-                    <span class="model-tag">Extra Trees</span>
-                    <span class="model-tag">Gradient Boosting</span>
-                    <span class="model-tag">Smart Routing</span>
-                    <span class="model-tag">Confidence-Based</span>
+    <h1>Anomalie Predictor</h1>
+    
+    <div class="form-group">
+        <label for="description">Anomaly Description:</label>
+        <textarea id="description" rows="4" required placeholder="Décrivez l'anomalie en détail..."></textarea>
+    </div>
+
+    <div class="form-group">
+        <label for="equipment_type">Equipment Type:</label>
+        <select id="equipment_type" class="select2-search" required>
+            <option value="">Select equipment type...</option>
+            {% for equipment in equipment_types %}
+            <option value="{{ equipment }}">{{ equipment }}</option>
+            {% endfor %}
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="section">Section:</label>
+        <select id="section" required>
+            <option value="">Select a section...</option>
+            {% for section in sections %}
+            <option value="{{ section }}">{{ section }}</option>
+            {% endfor %}
+        </select>
+    </div>
+
+    <button onclick="predict()">Predict Parameters</button>
+    
+    <div class="error-message" id="error-display"></div>
+
+    <div id="result">
+        <h2>Prediction Results</h2>
+        
+        <div class="predictor-section">
+            <h3>AI Reasoning</h3>
+            <div class="severity-badge" id="smart-severity-level"></div>
+            
+            <div class="info-row">
+                <span class="info-label">Total Criticality:</span>
+                <span id="smart-criticality"></span>
+            </div>
+            
+            <div class="severity-details">
+                <h4>Predicted Parameters</h4>
+                <div class="info-row">
+                    <span class="info-label">Fiabilité Intégrité:</span>
+                    <span id="smart-fiabilite"></span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">Disponibilité:</span>
+                    <span id="smart-disponibilite"></span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">Process Safety:</span>
+                    <span id="smart-process-safety"></span>
                 </div>
             </div>
         </div>
 
-        <div class="form-container">
-            <div class="info-section">
-                <h3>Hybrid System Features</h3>
-                <ul style="margin-top: 10px; padding-left: 20px;">
-                    <li><strong>Smart Routing:</strong> Uses lookup for known equipment (82% accuracy), ML for unknowns (67.8%)</li>
-                    <li><strong>Historical Data:</strong> 4000+ equipment records with proven TAQA priorities</li>
-                    <li><strong>ML Fallback:</strong> Advanced ensemble for new or unknown equipment types</li>
-                    <li><strong>Confidence-Based:</strong> Automatic selection of best prediction method</li>
-                    <li><strong>Domain Intelligence:</strong> TAQA-specific keywords and equipment criticality</li>
-                </ul>
+        <div class="predictor-section" style="margin-top: 30px;">
+            <h3>Statistical ML Model</h3>
+            <div class="severity-badge" id="fast-severity-level"></div>
+            
+            <div class="info-row">
+                <span class="info-label">Total Criticality:</span>
+                <span id="fast-criticality"></span>
             </div>
-
-            <form id="anomalyForm">
-                <div class="form-group">
-                    <label for="description">Anomaly Description *</label>
-                    <textarea id="description" name="description" required 
-                              placeholder="Describe the anomaly in detail (French text preferred)..."></textarea>
-                    <button type="button" class="example-btn" onclick="loadExample('high')">Critical Issue</button>
-                    <button type="button" class="example-btn" onclick="loadExample('medium')">Equipment Maintenance</button>
-                    <button type="button" class="example-btn" onclick="loadExample('low')">Routine Work</button>
+            
+            <div class="severity-details">
+                <h4>Predicted Parameters</h4>
+                <div class="info-row">
+                    <span class="info-label">Fiabilité Intégrité:</span>
+                    <span id="fast-fiabilite"></span>
                 </div>
-
-                <div class="form-group">
-                    <label for="equipment_type">Equipment Type *</label>
-                    <input type="text" id="equipment_type" name="equipment_type" required
-                           placeholder="e.g., POMPE ALIMENTAIRE PRINCIPALE, ALTERNATEUR UNITE 1...">
-                    <div class="equipment-suggestions">
-                        Hybrid system checks lookup first, then uses ML for unknown equipment
-                    </div>
+                <div class="info-row">
+                    <span class="info-label">Disponibilité:</span>
+                    <span id="fast-disponibilite"></span>
                 </div>
-
-                <div class="form-group">
-                    <label for="section">Section/Department *</label>
-                    <select id="section" name="section" required>
-                        <option value="">Select Section</option>
-                        <option value="34MC">34MC - Mechanical Coal</option>
-                        <option value="34EL">34EL - Electrical</option>
-                        <option value="34CT">34CT - Control</option>
-                        <option value="34MD">34MD - Mechanical Diesel</option>
-                        <option value="34MM">34MM - Mechanical Maintenance</option>
-                        <option value="34MG">34MG - Mechanical General</option>
-                    </select>
-                </div>
-
-                <button type="submit" class="btn" id="submitBtn">
-                    Analyze with Hybrid System
-                </button>
-            </form>
-
-            <div class="loading" id="loading">
-                <div class="spinner"></div>
-                <p>Processing with hybrid system...</p>
-            </div>
-
-            <div class="error" id="error"></div>
-
-            <div class="result-container" id="resultContainer">
-                <div class="priority-badge" id="priorityBadge"></div>
-                <span class="method-badge" id="methodBadge"></span>
-                <h3>Hybrid Priority Prediction</h3>
-                <p style="font-size:1.3em;"><span id="priorityScore"></span> <span style="font-size:0.9em;opacity:0.7;">(1.0 = Low, 5.0 = Critical)</span></p>
-                <div class="confidence-bar">
-                    <div class="confidence-fill" id="confidenceFill"></div>
-                </div>
-                <div id="scoreExplanation" style="margin-top:15px;font-size:1.1em;"></div>
-                <div id="methodExplanation" style="margin-top:10px;font-size:1.0em;opacity:0.9;"></div>
-                <div style="margin-top:10px;">
-                    <span style="font-size:0.9em;opacity:0.8;">System Confidence: <span id="confidenceLevel" style="font-weight:600;"></span></span>
-                </div>
-                
-                <div class="feature-analysis" id="featureAnalysis" style="display:none;">
-                    <h4>System Analysis</h4>
-                    <div id="featureDetails"></div>
-                </div>
-                
-                <div class="model-contributions" id="modelContributions" style="display:none;">
-                    <h4>Method Used</h4>
-                    <div id="contributionDetails"></div>
-                </div>
-                
-                <div style="margin-top: 20px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.2);">
-                    <h4>Input Summary</h4>
-                    <p><strong>Description:</strong> <span id="inputDescription"></span></p>
-                    <p><strong>Equipment:</strong> <span id="inputEquipment"></span></p>
-                    <p><strong>Section:</strong> <span id="inputSection"></span></p>
+                <div class="info-row">
+                    <span class="info-label">Process Safety:</span>
+                    <span id="fast-process-safety"></span>
                 </div>
             </div>
         </div>
     </div>
 
+    <!-- Add jQuery and Select2 JS -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script>
-        // Example data showcasing ML capabilities
-        const examples = {
-            high: {
-                description: "URGENT: Fuite importante de vapeur par tresse pompe alimentaire - arrêt immédiat requis pour sécurité",
-                equipment_type: "POMPE ALIMENTAIRE PRINCIPALE",
-                section: "34MC"
-            },
-            medium: {
-                description: "Défaut alternateur unité - vibrations anormales détectées lors contrôle routine",
-                equipment_type: "ALTERNATEUR UNITE 1",
-                section: "34EL"
-            },
-            low: {
-                description: "Prévoir contrôle préventif éclairage salle technique - amélioration générale",
-                equipment_type: "ECLAIRAGE SALLE TECHNIQUE",
-                section: "34EL"
-            }
-        };
-
-        function loadExample(type) {
-            const example = examples[type];
-            document.getElementById('description').value = example.description;
-            document.getElementById('equipment_type').value = example.equipment_type;
-            document.getElementById('section').value = example.section;
+        function getScoreClass(score) {
+            return `score-${score}`;
+        }
+        
+        function getSeverityClass(criticality) {
+            if (criticality >= 13) return 'critical';
+            if (criticality >= 11) return 'high';
+            if (criticality >= 9) return 'medium';
+            return 'low';
+        }
+        
+        function updatePredictorDisplay(prefix, data) {
+            // Update severity level
+            const severityEl = document.getElementById(`${prefix}-severity-level`);
+            severityEl.textContent = data.severity_level;
+            severityEl.className = `severity-badge ${getSeverityClass(data.criticality)}`;
+            
+            // Update criticality
+            document.getElementById(`${prefix}-criticality`).textContent = data.criticality;
+            
+            // Update parameters
+            const params = data.predictions;
+            document.getElementById(`${prefix}-fiabilite`).innerHTML = 
+                `${params['Fiabilité']} <span class="parameter-score ${getScoreClass(params['Fiabilité'])}">${params['Fiabilité']}/5</span>`;
+            document.getElementById(`${prefix}-disponibilite`).innerHTML = 
+                `${params['Disponibilité']} <span class="parameter-score ${getScoreClass(params['Disponibilité'])}">${params['Disponibilité']}/5</span>`;
+            document.getElementById(`${prefix}-process-safety`).innerHTML = 
+                `${params['Process Safety']} <span class="parameter-score ${getScoreClass(params['Process Safety'])}">${params['Process Safety']}/5</span>`;
         }
 
-        document.getElementById('anomalyForm').addEventListener('submit', async function(e) {
-            e.preventDefault();
+        function predict() {
+            document.getElementById('error-display').style.display = 'none';
+            document.getElementById('result').style.display = 'none';
             
-            const submitBtn = document.getElementById('submitBtn');
-            const loading = document.getElementById('loading');
-            const error = document.getElementById('error');
-            const resultContainer = document.getElementById('resultContainer');
+            const description = document.getElementById('description').value.trim();
+            const equipment_type = document.getElementById('equipment_type').value.trim();
+            const section = document.getElementById('section').value.trim();
             
-            // Show loading
-            submitBtn.disabled = true;
-            loading.style.display = 'block';
-            error.style.display = 'none';
-            resultContainer.style.display = 'none';
+            if (!description) {
+                showError("La description est requise");
+                return;
+            }
+            if (!equipment_type) {
+                showError("Le type d'équipement est requis");
+                return;
+            }
+            if (!section) {
+                showError("La section est requise");
+                return;
+            }
             
-            // Prepare data
-            const formData = {
-                description: document.getElementById('description').value,
-                equipment_type: document.getElementById('equipment_type').value,
-                section: document.getElementById('section').value
-            };
-            
-            try {
-                const response = await fetch('/predict', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(formData)
-                });
-                
-                const result = await response.json();
-                
-                if (result.error) {
-                    throw new Error(result.error);
+            fetch('/predict', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    description: description,
+                    equipment_type: equipment_type,
+                    section: section
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.error) {
+                    showError(data.error);
+                    return;
                 }
                 
-                // Display result
-                displayResult(result, formData);
+                // Update displays for both predictors
+                updatePredictorDisplay('fast', data.fast_predictor);
+                updatePredictorDisplay('smart', data.smart_predictor);
                 
-            } catch (err) {
-                error.textContent = `Error: ${err.message}`;
-                error.style.display = 'block';
-            } finally {
-                submitBtn.disabled = false;
-                loading.style.display = 'none';
-            }
+                document.getElementById('result').style.display = 'block';
+            })
+            .catch(error => {
+                showError("An error occurred while making the prediction");
+                console.error('Error:', error);
+            });
+        }
+        
+        function showError(message) {
+            const errorDiv = document.getElementById('error-display');
+            errorDiv.textContent = message;
+            errorDiv.style.display = 'block';
+        }
+
+        // Initialize Select2 with search
+        $(document).ready(function() {
+            $('#equipment_type').select2({
+                placeholder: 'Search and select equipment...',
+                allowClear: true,
+                minimumInputLength: 1,
+                matcher: function(params, data) {
+                    // If there are no search terms, return all options
+                    if ($.trim(params.term) === '') {
+                        return data;
+                    }
+
+                    // Do not display the item if there is no 'text' property
+                    if (typeof data.text === 'undefined') {
+                        return null;
+                    }
+
+                    // Custom matching function for better search
+                    const searchStr = params.term.toLowerCase();
+                    const textStr = data.text.toLowerCase();
+
+                    // Split search terms by space for multi-word search
+                    const searchTerms = searchStr.split(/\s+/);
+                    
+                    // Check if all search terms are found in the text
+                    const allTermsFound = searchTerms.every(term => textStr.includes(term));
+                    
+                    if (allTermsFound) {
+                        return data;
+                    }
+                    
+                    return null;
+                }
+            });
         });
-
-        function displayResult(result, inputData) {
-            const resultContainer = document.getElementById('resultContainer');
-            const priorityBadge = document.getElementById('priorityBadge');
-            const methodBadge = document.getElementById('methodBadge');
-            const priorityScore = document.getElementById('priorityScore');
-            const confidenceFill = document.getElementById('confidenceFill');
-            const scoreExplanation = document.getElementById('scoreExplanation');
-            const methodExplanation = document.getElementById('methodExplanation');
-            const confidenceLevel = document.getElementById('confidenceLevel');
-
-            // Set color class based on score
-            let score = result.priority_score;
-            let badgeText = `Priority: ${score}`;
-            let badgeClass = '';
-            let explanation = '';
-            
-            if (score >= 4.0) {
-                badgeClass = 'result-high';
-                explanation = 'Critical Priority - Immediate action required';
-            } else if (score >= 3.0) {
-                badgeClass = 'result-high';
-                explanation = 'High Priority - Urgent attention needed';
-            } else if (score >= 2.0) {
-                badgeClass = 'result-medium';
-                explanation = 'Medium Priority - Schedule maintenance';
-            } else {
-                badgeClass = 'result-low';
-                explanation = 'Low Priority - Routine or preventive work';
-            }
-            
-            resultContainer.className = `result-container ${badgeClass}`;
-            priorityBadge.textContent = badgeText;
-            methodBadge.textContent = result.method || 'Advanced ML';
-            priorityScore.textContent = score;
-            confidenceFill.style.width = `${Math.min(100, ((score-1)/4)*100)}%`;
-            scoreExplanation.textContent = explanation;
-            
-            // Set method information
-            if (result.explanation) {
-                methodExplanation.textContent = result.explanation;
-            }
-            if (result.confidence) {
-                confidenceLevel.textContent = `${(result.confidence * 100).toFixed(1)}%`;
-            }
-            
-            // Feature analysis
-            if (result.feature_analysis) {
-                const featureAnalysis = document.getElementById('featureAnalysis');
-                const featureDetails = document.getElementById('featureDetails');
-                const features = result.feature_analysis;
-                
-                let featuresHtml = '<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px;">';
-                featuresHtml += `<div>Safety Score: ${(features.safety_score * 100).toFixed(0)}%</div>`;
-                featuresHtml += `<div>Urgency Score: ${(features.urgency_score * 100).toFixed(0)}%</div>`;
-                featuresHtml += `<div>Technical Score: ${(features.technical_score * 100).toFixed(0)}%</div>`;
-                featuresHtml += `<div>Overall Complexity: ${score.toFixed(1)}/5.0</div>`;
-                featuresHtml += '</div>';
-                
-                featureDetails.innerHTML = featuresHtml;
-                featureAnalysis.style.display = 'block';
-            }
-            
-            // Model contributions
-            if (result.model_contributions) {
-                const modelContributions = document.getElementById('modelContributions');
-                const contributionDetails = document.getElementById('contributionDetails');
-                const contributions = result.model_contributions;
-                
-                let contributionsHtml = '';
-                for (const [model, data] of Object.entries(contributions)) {
-                    const percentage = (data.weight * 100).toFixed(1);
-                    contributionsHtml += `<div class="contribution-item">
-                        <span>${model}</span>
-                        <span>${data.prediction.toFixed(2)} (${percentage}%)</span>
-                    </div>`;
-                }
-                
-                contributionDetails.innerHTML = contributionsHtml;
-                modelContributions.style.display = 'block';
-            }
-            
-            // Set input summary
-            document.getElementById('inputDescription').textContent = inputData.description;
-            document.getElementById('inputEquipment').textContent = inputData.equipment_type || 'Not specified';
-            document.getElementById('inputSection').textContent = inputData.section || 'Not specified';
-            
-            // Show result
-            resultContainer.style.display = 'block';
-            resultContainer.scrollIntoView({ behavior: 'smooth' });
-        }
     </script>
 </body>
-</html>
+</html> 
