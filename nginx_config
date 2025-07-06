@@ -12,6 +12,6 @@ server {
     }
 
     location /static {
-        alias /var/www/anomaly_predictor/static;
+        alias /home/ubuntu/anomaly_predictor/static;
     }
 } 

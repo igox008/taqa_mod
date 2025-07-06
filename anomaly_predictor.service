@@ -3,11 +3,12 @@ Description=Anomaly Predictor Web Application
 After=network.target
 
 [Service]
-User=www-data
-Group=www-data
-WorkingDirectory=/var/www/anomaly_predictor
-Environment="PATH=/var/www/anomaly_predictor/venv/bin"
-ExecStart=/var/www/anomaly_predictor/venv/bin/gunicorn -c gunicorn_config.py app:app
+User=ubuntu
+Group=ubuntu
+WorkingDirectory=/home/ubuntu/anomaly_predictor
+Environment="PATH=/home/ubuntu/anomaly_predictor/venv/bin"
+Environment="PYTHONPATH=/home/ubuntu/anomaly_predictor"
+ExecStart=/home/ubuntu/anomaly_predictor/venv/bin/gunicorn --workers 3 --bind 0.0.0.0:8000 wsgi:app
 
 [Install]
 WantedBy=multi-user.target 
