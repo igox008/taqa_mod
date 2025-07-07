@@ -255,6 +255,36 @@ def predict_anomaly():
             "status": "error"
         }), 500
 
+@app.route('/debug', methods=['GET'])
+def debug_info():
+    """Debug endpoint to check system status"""
+    import os
+    import sys
+    
+    # Check file existence
+    required_files = [
+        'availability_model.pkl',
+        'fiability_model.pkl', 
+        'process_safety_model.pkl',
+        'equipment_simple.csv',
+        'severe_words_simple.csv'
+    ]
+    
+    file_status = {}
+    for file in required_files:
+        file_status[file] = {
+            "exists": os.path.exists(file),
+            "size_mb": round(os.path.getsize(file) / 1024 / 1024, 2) if os.path.exists(file) else 0
+        }
+    
+    return jsonify({
+        "predictor_loaded": predictor is not None,
+        "python_version": sys.version,
+        "working_directory": os.getcwd(),
+        "files": file_status,
+        "environment": dict(os.environ)
+    })
+
 @app.route('/models/info', methods=['GET'])
 def models_info():
     """Get information about loaded models"""
