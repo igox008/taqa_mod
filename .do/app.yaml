@@ -1,0 +1,20 @@
+name: equipment-prediction-api
+services:
+- environment_slug: python
+  github:
+    branch: main
+    deploy_on_push: true
+    repo: # Add your GitHub repo here (e.g., yourusername/ML)
+  http_port: 5000
+  instance_count: 1
+  instance_size_slug: basic-xxs  # $5/month - upgrade to basic-xs ($12) for production
+  name: api
+  routes:
+  - path: /
+  run_command: gunicorn -c gunicorn_appplatform.conf.py wsgi:app
+  source_dir: /
+  envs:
+  - key: PYTHONPATH
+    value: /app
+  - key: FLASK_ENV
+    value: production 

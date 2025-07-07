@@ -362,56 +362,91 @@ Output: 3 Predictions + Overall Score + Total Sum
 ### Quick Start
 ```bash
 # 1. Clone/download project files
-cd ml3/
+cd ML/
 
-# 2. Make run script executable
-chmod +x run_web_app.sh
+# 2. Make API script executable
+chmod +x start_api.sh
 
-# 3. Launch application (auto-installs dependencies)
-./run_web_app.sh
+# 3. Launch API (auto-installs dependencies)
+./start_api.sh
 
-# 4. Open browser to http://localhost:5000
+# 4. API available at http://localhost:5000
 ```
 
 ### Manual Installation
 ```bash
 # Create virtual environment
-python3 -m venv web_env
-source web_env/bin/activate
+python3 -m venv api_env
+source api_env/bin/activate
 
 # Install dependencies
-pip install -r requirements.txt
+pip install -r requirements_api.txt
 
-# Launch application
-python app.py
+# Launch API
+python api_server.py
 ```
 
 ---
 
-## 🧪 Testing the System
+## 🧪 Testing the API
+
+### API Endpoints
+
+**Health Check**:
+```bash
+curl -X GET http://localhost:5000/health
+```
+
+**Model Information**:
+```bash
+curl -X GET http://localhost:5000/models/info
+```
+
+**Single Prediction**:
+```bash
+curl -X POST http://localhost:5000/predict \
+  -H "Content-Type: application/json" \
+  -d '{
+    "anomaly_id": "TEST-001",
+    "description": "Explosion détectée avec fuite importante et alarme sécurité",
+    "equipment_name": "POMPE FUEL PRINCIPALE N°1",
+    "equipment_id": "98b82203-7170-45bf-879e-f47ba6e12c86"
+  }'
+```
+
+**Batch Prediction** (Multiple Anomalies):
+```bash
+curl -X POST http://localhost:5000/predict \
+  -H "Content-Type: application/json" \
+  -d '[
+    {
+      "anomaly_id": "BATCH-001",
+      "description": "Maintenance préventive normale, contrôle de routine",
+      "equipment_name": "Equipment 1",
+      "equipment_id": "uuid-1"
+    },
+    {
+      "anomaly_id": "BATCH-002", 
+      "description": "Fuite importante vapeur toxique avec évacuation personnel",
+      "equipment_name": "Equipment 2",
+      "equipment_id": "uuid-2"
+    }
+  ]'
+```
 
 ### Test Cases
 
 **1. High Risk Equipment**:
-```
-Equipment ID: Any from dropdown
-Description: "Explosion détectée avec fuite importante et alarme sécurité"
-Expected: Low scores (1.5-2.5 range), red/orange indicators
-```
+- **Input**: "Explosion détectée avec fuite importante et alarme sécurité"
+- **Expected**: Low scores (1.5-2.5 range), requires_immediate_attention: true
 
 **2. Normal Maintenance**:
-```
-Equipment ID: Any from dropdown  
-Description: "Maintenance préventive normale, contrôle de routine"
-Expected: Medium scores (2.5-3.5 range), yellow indicators
-```
+- **Input**: "Maintenance préventive normale, contrôle de routine"
+- **Expected**: Medium scores (2.5-3.5 range), priority_level: "medium"
 
 **3. Critical Safety Issue**:
-```
-Equipment ID: Any from dropdown
-Description: "Fuite importante vapeur toxique avec évacuation personnel"
-Expected: Very low safety score (<2.0), critical indicators
-```
+- **Input**: "Fuite importante vapeur toxique avec évacuation personnel"
+- **Expected**: Very low safety score (<2.0), overall_risk_level: "critical"
 
 ### Validation Results
 - **Availability Model**: Predicts within ±0.21 points on average
@@ -530,7 +565,7 @@ Expected: Very low safety score (<2.0), critical indicators
 
 ✅ **Delivered a complete AI-powered equipment prediction system**
 ✅ **Achieved high accuracy**: MAE 0.134-0.350 across all three metrics  
-✅ **Built production-ready web interface** with 1,404 equipment database
+✅ **Built production-ready REST API** with batch processing support (up to 6000 anomalies)
 ✅ **Created comprehensive documentation** for future maintenance
 ✅ **Established scalable architecture** for additional models/features
 
