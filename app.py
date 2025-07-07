@@ -1,152 +1,223 @@
-#!/usr/bin/env python3
-"""
-Web interface for Equipment Parameter Predictor
-"""
-
-from flask import Flask, request, render_template, jsonify
-from equipment_anomaly_predictor_fast import FastParameterPredictor, SmartParameterPredictor
+from flask import Flask, render_template, request, jsonify
 import pandas as pd
-from datetime import datetime
-import os
-import joblib
+import numpy as np
+import json
+from comprehensive_prediction_system import ComprehensiveEquipmentPredictor
 import traceback
-import logging
-from dotenv import load_dotenv
-
-# Load environment variables
-load_dotenv()
-
-# Configure logging
-logging.basicConfig(level=logging.DEBUG)
-logger = logging.getLogger(__name__)
 
 app = Flask(__name__)
 
-# Initialize the predictors
-logger.info("Loading model components...")
-try:
-    fast_predictor = FastParameterPredictor()
-    fast_predictor.load_model('models/parameter_predictor.joblib')
-    smart_predictor = SmartParameterPredictor()
-    logger.info("Models loaded successfully")
-except Exception as e:
-    logger.error(f"Error loading models: {str(e)}")
-    logger.error(traceback.format_exc())
-    raise
+# Global predictor instance
+predictor = None
 
-# Get available sections from CSV
-try:
-    data = pd.read_csv('data_set.csv')
-    AVAILABLE_SECTIONS = sorted(data['Section propriétaire'].unique())
-    
-    # Filter out NaN values and empty strings before sorting equipment types
-    equipment_series = data['Description de l\'équipement']
-    AVAILABLE_EQUIPMENT = sorted(equipment_series[equipment_series.notna() & (equipment_series != '')].unique())
-    
-    logger.info(f"Loaded {len(AVAILABLE_SECTIONS)} sections and {len(AVAILABLE_EQUIPMENT)} equipment types")
-except Exception as e:
-    logger.error(f"Error loading categories: {str(e)}")
-    logger.error(traceback.format_exc())
-    raise
+def initialize_models():
+    """Initialize and load all ML models"""
+    global predictor
+    try:
+        print("Initializing ML models...")
+        predictor = ComprehensiveEquipmentPredictor()
+        
+        # Try to load existing models
+        if not predictor.load_models():
+            print("Training models from scratch...")
+            if not predictor.train_all_models():
+                raise Exception("Failed to train models")
+        
+        print("✅ All models loaded successfully!")
+        return True
+        
+    except Exception as e:
+        print(f"❌ Error initializing models: {e}")
+        traceback.print_exc()
+        return False
+
+def load_equipment_data():
+    """Load equipment data for dropdown menu"""
+    try:
+        # Load equipment data from all three CSV files
+        equipment_data = []
+        
+        # Load availability equipment data
+        avail_df = pd.read_csv('equipment_simple.csv')
+        for _, row in avail_df.iterrows():
+            # Handle missing/NaN descriptions
+            description = row['Equipment_Description']
+            if pd.isna(description) or description is None:
+                description = f"Equipment {row['Equipment_ID']}"
+            else:
+                description = str(description).strip()
+                
+            # Truncate long descriptions
+            if len(description) > 100:
+                display_name = description[:100] + "..."
+            else:
+                display_name = description
+                
+            equipment_data.append({
+                'id': str(row['Equipment_ID']),
+                'name': display_name,
+                'full_name': description,
+                'avg_availability': float(row['Average_Score']) if not pd.isna(row['Average_Score']) else 0.0
+            })
+        
+        # Sort by equipment name for better UX
+        equipment_data.sort(key=lambda x: x['name'])
+        
+        return equipment_data
+        
+    except Exception as e:
+        print(f"Error loading equipment data: {e}")
+        import traceback
+        traceback.print_exc()
+        return []
 
 @app.route('/')
-def home():
-    return render_template('index.html', sections=AVAILABLE_SECTIONS, equipment_types=AVAILABLE_EQUIPMENT)  # Add equipment_types
-
-def get_severity_level(total_score):
-    """Determine severity level based on total score"""
-    if total_score <= 7:
-        return "MINEUR - Maintenance de routine"
-    elif total_score <= 9:
-        return "MODÉRÉ - Planifier intervention"
-    else:
-        return "CRITIQUE - Intervention immédiate requise"
+def index():
+    """Main page with prediction form"""
+    equipment_data = load_equipment_data()
+    return render_template('index.html', equipment_list=equipment_data)
 
 @app.route('/predict', methods=['POST'])
 def predict():
+    """Handle prediction requests"""
     try:
+        # Get form data
         data = request.get_json()
-        logger.info(f"Received prediction request with data: {data}")
+        description = data.get('description', '').strip()
+        equipment_id = data.get('equipment_id', '').strip()
+        equipment_name = data.get('equipment_name', '').strip()
         
-        # Validate input data
-        required_fields = ['description', 'equipment_type', 'section']
-        for field in required_fields:
-            if field not in data:
-                logger.warning(f"Missing required field: {field}")
-                return jsonify({
-                    'error': f'Missing required field: {field}'
-                }), 400
+        # Validate input
+        if not description:
+            return jsonify({
+                'error': True,
+                'message': 'Please provide an anomaly description'
+            })
         
-        # Validate text fields are not empty
-        if not data['description'].strip():
-            return jsonify({'error': 'Description cannot be empty'}), 400
-        if not data['equipment_type'].strip():
-            return jsonify({'error': 'Equipment type cannot be empty'}), 400
-        if not data['section'].strip():
-            return jsonify({'error': 'Section cannot be empty'}), 400
-            
-        # Make predictions with both models
-        logger.debug("Making predictions with parameters:")
-        logger.debug(f"Description: {data['description']}")
-        logger.debug(f"Equipment: {data['equipment_type']}")
-        logger.debug(f"Section: {data['section']}")
+        if not equipment_id:
+            return jsonify({
+                'error': True,
+                'message': 'Please select an equipment'
+            })
         
-        # Get predictions from both models
-        fast_result = fast_predictor.predict(
-            description=data['description'],
-            equipment_type=data['equipment_type'],
-            section=data['section']
-        )
+        # Make prediction using comprehensive predictor
+        if predictor is None:
+            return jsonify({
+                'error': True,
+                'message': 'Models not loaded. Please restart the application.'
+            })
         
-        smart_result = smart_predictor.predict(
-            description=data['description'],
-            equipment_type=data['equipment_type'],
-            section=data['section']
-        )
+        # Get comprehensive prediction
+        results = predictor.predict_all(description, equipment_name, equipment_id)
         
-        logger.info(f"Fast predictor result: {fast_result}")
-        logger.info(f"Smart predictor result: {smart_result}")
-        
-        # Calculate criticality for both predictions (only numeric values)
-        fast_criticality = fast_result['Fiabilité'] + fast_result['Disponibilité'] + fast_result['Process Safety']
-        smart_criticality = smart_result['Fiabilité'] + smart_result['Disponibilité'] + smart_result['Process Safety']
-        
-        # Format response with new severity levels
+        # Format response
         response = {
-            'smart_predictor': {
-                'predictions': {
-                    'Fiabilité': smart_result['Fiabilité'],
-                    'Disponibilité': smart_result['Disponibilité'],
-                    'Process Safety': smart_result['Process Safety']
+            'error': False,
+            'predictions': {
+                'availability': {
+                    'score': results['predictions']['availability'],
+                    'level': get_score_level(results['predictions']['availability']),
+                    'color': get_score_color(results['predictions']['availability'])
                 },
-                'criticality': smart_criticality,
-                'severity_level': get_severity_level(smart_criticality)
-            },
-            'fast_predictor': {
-                'predictions': {
-                    'Fiabilité': fast_result['Fiabilité'],
-                    'Disponibilité': fast_result['Disponibilité'],
-                    'Process Safety': fast_result['Process Safety']
+                'fiability': {
+                    'score': results['predictions']['fiability'],
+                    'level': get_score_level(results['predictions']['fiability']),
+                    'color': get_score_color(results['predictions']['fiability'])
                 },
-                'criticality': fast_criticality,
-                'severity_level': get_severity_level(fast_criticality)
+                'process_safety': {
+                    'score': results['predictions']['process_safety'],
+                    'level': get_score_level(results['predictions']['process_safety']),
+                    'color': get_score_color(results['predictions']['process_safety'])
+                },
+                'overall': {
+                    'score': results['predictions']['overall_score'],
+                    'level': get_score_level(results['predictions']['overall_score']),
+                    'color': get_score_color(results['predictions']['overall_score'])
+                }
             },
-            'timestamp': datetime.now().isoformat()
+            'risk_assessment': results['risk_assessment'],
+            'detailed_analysis': results['detailed_analysis'],
+            'recommendations': results['maintenance_recommendations']
         }
-            
-        logger.info(f"Sending response: {response}")
+        
         return jsonify(response)
         
     except Exception as e:
-        logger.error("Error in prediction:")
-        logger.error(str(e))
-        logger.error(traceback.format_exc())
+        print(f"Error during prediction: {e}")
+        traceback.print_exc()
         return jsonify({
-            'error': 'An error occurred while processing the prediction',
-            'details': str(e),
-            'traceback': traceback.format_exc()
-        }), 500
+            'error': True,
+            'message': f'Prediction error: {str(e)}'
+        })
+
+@app.route('/equipment/<equipment_id>')
+def get_equipment_info(equipment_id):
+    """Get equipment information by ID"""
+    try:
+        # Load equipment data and find the requested equipment
+        equipment_data = load_equipment_data()
+        
+        for equipment in equipment_data:
+            if equipment['id'] == equipment_id:
+                return jsonify({
+                    'error': False,
+                    'equipment': equipment
+                })
+        
+        return jsonify({
+            'error': True,
+            'message': 'Equipment not found'
+        })
+        
+    except Exception as e:
+        return jsonify({
+            'error': True,
+            'message': f'Error: {str(e)}'
+        })
+
+def get_score_level(score):
+    """Convert numeric score to descriptive level"""
+    if score >= 4.0:
+        return "Excellent"
+    elif score >= 3.5:
+        return "Good"
+    elif score >= 3.0:
+        return "Fair"
+    elif score >= 2.0:
+        return "Poor"
+    else:
+        return "Critical"
+
+def get_score_color(score):
+    """Get color code for score visualization"""
+    if score >= 4.0:
+        return "success"  # Green
+    elif score >= 3.5:
+        return "info"     # Light blue
+    elif score >= 3.0:
+        return "warning"  # Yellow
+    elif score >= 2.0:
+        return "danger"   # Orange/Red
+    else:
+        return "dark"     # Dark red
+
+@app.route('/health')
+def health_check():
+    """Health check endpoint"""
+    return jsonify({
+        'status': 'healthy',
+        'models_loaded': predictor is not None
+    })
 
 if __name__ == '__main__':
-    port = int(os.getenv('PORT', 8080))
-    app.run(host='0.0.0.0', port=port) 
+    print("🚀 Starting Equipment Prediction Web Application...")
+    print("=" * 60)
+    
+    # Initialize models
+    if initialize_models():
+        print("🌐 Starting web server...")
+        print("📋 Available at: http://localhost:5000")
+        print("=" * 60)
+        app.run(debug=True, host='0.0.0.0', port=5000)
+    else:
+        print("❌ Failed to initialize models. Cannot start web application.") 

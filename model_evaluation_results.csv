@@ -1,9 +1,0 @@
-Model,Type,Test_MAE,Test_RMSE,Test_R2,Test_Accuracy,Test_F1,Test_Precision
-Linear Regression_regression,Regression,7.914117540580065e-14,9.960556138184275e-14,1.0,,,
-Random Forest_regression,Regression,0.06985294117647056,0.2532096484149452,0.9817216766617752,,,
-Gradient Boosting_regression,Regression,0.04476195683574121,0.07143541772779392,0.9985452008705313,,,
-SVR_regression,Regression,0.22635178724176372,0.41078613655095947,0.9518930955771112,,,
-Neural Network_regression,Regression,0.18555319022631372,0.26677030544178487,0.9797114585188086,,,
-Gradient Boosting Classifier_classification,Classification,,,,0.9737394957983193,0.9710852915874224,0.969518344142543
-Random Forest Classifier_classification,Classification,,,,0.8855042016806722,0.8800678222489923,0.8888402072465945
-Neural Network Classifier_classification,Classification,,,,0.9191176470588235,0.9171857657517013,0.9165127309381741

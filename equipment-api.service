@@ -1,0 +1,20 @@
+[Unit]
+Description=Equipment Prediction API
+After=network.target
+
+[Service]
+Type=exec
+User=root
+Group=root
+WorkingDirectory=/root/ml3
+Environment=PATH=/root/ml3/api_env/bin
+ExecStart=/root/ml3/api_env/bin/gunicorn -c /root/ml3/gunicorn.conf.py wsgi:app
+ExecReload=/bin/kill -s HUP $MAINPID
+Restart=always
+RestartSec=10
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=equipment-api
+
+[Install]
+WantedBy=multi-user.target 
