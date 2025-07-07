@@ -8,7 +8,7 @@ services:
     repo: # Add your GitHub repo here (e.g., yourusername/ML)
   instance_count: 1
   instance_size_slug: basic-xs  # $12/month - Required for ML models (1GB RAM)
-  run_command: gunicorn -c gunicorn_appplatform.conf.py wsgi:app
+  run_command: python start_simple.py
   source_dir: /
   routes:
   - path: /
