@@ -206,11 +206,11 @@ class ComprehensiveEquipmentPredictor:
         return comprehensive_results
 ```
 
-### Phase 4: Web Application Development
+### Phase 4: API Development
 
-#### Step 4.1: Flask Backend (`app.py`)
+#### Step 4.1: REST API Backend (`api_server.py`)
 
-**Purpose**: Create REST API for equipment predictions.
+**Purpose**: Production-ready REST API for equipment predictions with batch processing support.
 
 **Key Components**:
 
@@ -222,55 +222,23 @@ class ComprehensiveEquipmentPredictor:
        predictor.load_models()  # Load all 3 pre-trained models
    ```
 
-2. **Equipment Data Loading**:
-   ```python
-   def load_equipment_data():
-       # Load 1,404 equipment from equipment_simple.csv
-       # Handle NaN descriptions gracefully
-       # Sort alphabetically for better UX
-       return equipment_data
-   ```
-
-3. **Prediction Endpoint**:
+2. **Single & Batch Prediction Endpoint**:
    ```python
    @app.route('/predict', methods=['POST'])
-   def predict():
-       # Get user input: description, equipment_id, equipment_name
-       # Validate inputs
-       # Call predictor.predict_all()
-       # Format response with scores and risk assessment
+   def predict_anomaly():
+       # Supports single anomaly object OR array of anomalies (up to 6000)
+       # Validates inputs automatically
+       # Processes predictions with progress tracking
+       # Returns comprehensive results with performance metrics
        return jsonified_results
    ```
 
-#### Step 4.2: Frontend Interface (`templates/index.html`)
-
-**Purpose**: Simple, clean web interface for predictions.
-
-**Interface Components**:
-
-1. **Input Form**:
-   ```html
-   - Equipment dropdown (1,404 options from database)
-   - Manual equipment ID entry field
-   - Anomaly description textarea
-   - "Get Predictions" button
-   ```
-
-2. **Results Display**:
-   ```html
-   - 3 prediction cards with color-coded scores
-   - Total sum calculation (sum of all 3 predictions)
-   - Color coding: Green (>4.0), Blue (3.5-4.0), Yellow (3.0-3.5), 
-                   Orange (2.0-3.0), Red (<2.0)
-   ```
-
-3. **JavaScript Functionality**:
-   ```javascript
-   - AJAX form submission to /predict endpoint
-   - Dynamic score display with color updates
-   - Equipment dropdown/manual entry logic
-   - Error handling and validation
-   ```
+3. **API Features**:
+   - **Automatic Detection**: Single vs batch processing
+   - **Progress Tracking**: Real-time progress for large batches
+   - **Performance Metrics**: Processing time and statistics
+   - **Error Handling**: Detailed validation and error reporting
+   - **Health Checks**: System status monitoring
 
 ---
 
@@ -308,11 +276,12 @@ ml3/
 │   ├── fiability_model.pkl          (5.5MB - MAE 0.134)
 │   └── process_safety_model.pkl     (11MB - MAE 0.350)
 │
-├── Web Application
-│   ├── app.py                       (Flask backend)
-│   ├── templates/index.html         (Frontend interface)
-│   ├── requirements.txt             (Dependencies)
-│   └── run_web_app.sh              (Launch script)
+├── API Application
+│   ├── api_server.py                (REST API backend)
+│   ├── requirements_api.txt         (API dependencies)
+│   ├── start_api.sh                 (API launch script)
+│   ├── gunicorn.conf.py            (Production server config)
+│   └── wsgi.py                     (WSGI entry point)
 │
 └── Usage Examples
     ├── simple_usage_example.py         (Availability only)
