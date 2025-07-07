@@ -75,25 +75,26 @@ def process_single_anomaly(anomaly_data):
             "equipment_name": anomaly_data['equipment_name'],
             "predictions": {
                 "availability": {
-                    "score": round(results['availability_prediction'], 3),
+                    "score": round(results['predictions']['availability'], 3),
                     "description": "Equipment uptime and operational readiness"
                 },
                 "reliability": {
-                    "score": round(results['reliability_prediction'], 3), 
+                    "score": round(results['predictions']['fiability'], 3), 
                     "description": "Equipment integrity and dependability"
                 },
                 "process_safety": {
-                    "score": round(results['process_safety_prediction'], 3),
+                    "score": round(results['predictions']['process_safety'], 3),
                     "description": "Safety risk assessment and hazard identification"
                 }
             },
-            "overall_score": round(results['overall_score'], 3),
-            "total_sum": round(results['total_sum'], 3),
+            "overall_score": round(results['predictions']['overall_score'], 3),
             "risk_assessment": {
-                "overall_risk_level": results['overall_risk_level'],
-                "priority_level": results['priority_level'],
-                "requires_immediate_attention": results['requires_immediate_attention']
+                "overall_risk_level": results['risk_assessment']['overall_risk_level'],
+                "recommended_action": results['risk_assessment']['recommended_action'],
+                "critical_factors": results['risk_assessment']['critical_factors'],
+                "weakest_aspect": results['risk_assessment']['weakest_aspect']
             },
+            "maintenance_recommendations": results['maintenance_recommendations'],
             "status": "success"
         }
     except Exception as e:
