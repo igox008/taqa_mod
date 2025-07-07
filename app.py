@@ -19,16 +19,28 @@ def initialize_models():
         return True
     except Exception as e:
         print(f"❌ Error loading models: {e}")
+        print(f"❌ App will start but predictions will not work")
         traceback.print_exc()
+        # Don't exit in production - let the app start but return errors
+        predictor = None
         return False
 
 @app.route('/health', methods=['GET'])
 def health_check():
     """Health check endpoint"""
+    models_loaded = predictor is not None
+    status = "healthy" if models_loaded else "degraded"
+    message = "Equipment Prediction API is running"
+    
+    if not models_loaded:
+        message = "API is running but ML models failed to load"
+    
     return jsonify({
-        "status": "healthy",
-        "models_loaded": predictor is not None,
-        "message": "Equipment Prediction API is running"
+        "status": status,
+        "models_loaded": models_loaded,
+        "message": message,
+        "app_name": "Equipment Prediction API",
+        "version": "1.0.0"
     })
 
 def validate_anomaly_data(anomaly_data, index=None):
@@ -294,41 +306,16 @@ def method_not_allowed(error):
         "message": "Check the HTTP method for this endpoint"
     }), 405
 
+# Initialize models when module loads (for production deployment)
+print("🚀 Starting Equipment Prediction API...")
+print("🔄 Initializing ML models...")
+initialize_models()
+
 if __name__ == '__main__':
-    print("🚀 Starting Equipment Prediction API...")
-    print("="*50)
-    
-    # Initialize models on startup
-    if initialize_models():
-        print("\n🌐 Starting Flask server...")
-        print("📡 API Endpoints:")
-        print("  GET  /health - Health check")
-        print("  GET  /models/info - Model information") 
-        print("  POST /predict - Make predictions (single or batch)")
-        print("\n📝 Example POST request to /predict (single anomaly):")
-        print("""{
-    "anomaly_id": "ANO-2024-001", 
-    "description": "Fuite importante d'huile au niveau du palier",
-    "equipment_name": "POMPE FUEL PRINCIPALE N°1",
-    "equipment_id": "98b82203-7170-45bf-879e-f47ba6e12c86"
-}""")
-        print("\n📝 Example POST request to /predict (multiple anomalies):")
-        print("""[
-    {
-        "anomaly_id": "ANO-2024-001",
-        "description": "First anomaly description",
-        "equipment_name": "Equipment 1",
-        "equipment_id": "uuid-1"
-    },
-    {
-        "anomaly_id": "ANO-2024-002", 
-        "description": "Second anomaly description",
-        "equipment_name": "Equipment 2",
-        "equipment_id": "uuid-2"
-    }
-]""")
-        print("="*50)
-        app.run(host='0.0.0.0', port=5000, debug=True)
-    else:
-        print("❌ Failed to initialize models. Exiting...")
-        exit(1) 
+    # Development server only
+    print("🌐 Starting development server...")
+    print("📡 API Endpoints:")
+    print("  GET  /health - Health check")
+    print("  GET  /models/info - Model information") 
+    print("  POST /predict - Make predictions (single or batch)")
+    app.run(host='0.0.0.0', port=5000, debug=True) 

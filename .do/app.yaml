@@ -7,7 +7,7 @@ services:
     repo: # Add your GitHub repo here (e.g., yourusername/ML)
   http_port: 5000
   instance_count: 1
-  instance_size_slug: basic-xxs  # $5/month - upgrade to basic-xs ($12) for production
+  instance_size_slug: basic-xs  # $12/month - Required for ML models (1GB RAM)
   name: api
   routes:
   - path: /
