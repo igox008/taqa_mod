@@ -2,9 +2,10 @@
 import os
 import multiprocessing
 
-# Server socket - App Platform sets this automatically
-port = int(os.environ.get("PORT", 5000))
+# Server socket - App Platform sets PORT automatically
+port = int(os.environ.get("PORT", 8080))  # App Platform default is 8080
 bind = f"0.0.0.0:{port}"
+print(f"🌐 Binding to {bind}")
 backlog = 2048
 
 # Worker processes - Conservative for App Platform

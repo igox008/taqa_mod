@@ -8,7 +8,7 @@ services:
     repo: # Add your GitHub repo here (e.g., yourusername/ML)
   instance_count: 1
   instance_size_slug: basic-xs  # $12/month - Required for ML models (1GB RAM)
-  run_command: gunicorn -c gunicorn_appplatform.conf.py wsgi:app
+  run_command: python start_simple.py
   source_dir: /
   routes:
   - path: /
@@ -16,8 +16,6 @@ services:
     http_path: /health
     initial_delay_seconds: 60  # Give time for models to load
     timeout_seconds: 30
-    period_seconds: 10
-    failure_threshold: 5
   envs:
   - key: PYTHONPATH
     value: /app

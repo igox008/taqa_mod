@@ -1,0 +1,1 @@
+web: gunicorn -c gunicorn_appplatform.conf.py wsgi:app 
