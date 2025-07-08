@@ -1,7 +1,13 @@
 from flask import Flask, request, jsonify
 import traceback
 import time
+import os
+import pandas as pd
+import numpy as np
+from datetime import datetime
+from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
 from comprehensive_prediction_system import ComprehensiveEquipmentPredictor
+from training_manager import training_manager
 
 app = Flask(__name__)
 
@@ -323,6 +329,467 @@ def models_info():
         }
     })
 
+@app.route('/models/metrics', methods=['GET'])
+def model_metrics():
+    """
+    Get comprehensive model performance metrics and statistics
+    
+    Returns detailed metrics including:
+    - Model accuracy and performance metrics (MAE, MSE, R2)
+    - Training data statistics and distribution
+    - Model file information (size, last modified)
+    - Training history and trends
+    - Data quality indicators
+    """
+    try:
+        if predictor is None:
+            return jsonify({
+                "error": "Models not loaded",
+                "models_loaded": False
+            }), 500
+        
+        print("📊 Calculating model metrics...")
+        
+        # Initialize metrics structure
+        metrics = {
+            "timestamp": datetime.now().isoformat(),
+            "models_loaded": True,
+            "model_performance": {},
+            "training_statistics": {},
+            "data_quality": {},
+            "model_files": {},
+            "training_history": {},
+            "summary": {}
+        }
+        
+        # === MODEL FILE INFORMATION ===
+        model_files = {
+            'availability': 'availability_model.pkl',
+            'fiability': 'fiability_model.pkl',
+            'process_safety': 'process_safety_model.pkl'
+        }
+        
+        for model_type, filename in model_files.items():
+            if os.path.exists(filename):
+                stat = os.stat(filename)
+                metrics["model_files"][model_type] = {
+                    "filename": filename,
+                    "size_mb": round(stat.st_size / (1024 * 1024), 2),
+                    "last_modified": datetime.fromtimestamp(stat.st_mtime).isoformat(),
+                    "exists": True
+                }
+            else:
+                metrics["model_files"][model_type] = {
+                    "filename": filename,
+                    "exists": False
+                }
+        
+        # === TRAINING DATA STATISTICS ===
+        data_files = {
+            'availability': 'disponibilite.csv',
+            'fiability': 'fiabilite.csv', 
+            'process_safety': 'process_safty.csv'
+        }
+        
+        for model_type, filename in data_files.items():
+            if os.path.exists(filename):
+                try:
+                    df = pd.read_csv(filename)
+                    target_cols = {
+                        'availability': 'Disponibilté',
+                        'fiability': 'Fiabilité Intégrité',
+                        'process_safety': 'Process Safety'
+                    }
+                    
+                    target_col = target_cols[model_type]
+                    if target_col in df.columns:
+                        target_data = df[target_col].dropna()
+                        
+                        metrics["training_statistics"][model_type] = {
+                            "total_records": len(df),
+                            "valid_target_records": len(target_data),
+                            "target_distribution": {
+                                "score_1": int(sum(target_data == 1)),
+                                "score_2": int(sum(target_data == 2)),
+                                "score_3": int(sum(target_data == 3)),
+                                "score_4": int(sum(target_data == 4)),
+                                "score_5": int(sum(target_data == 5))
+                            },
+                            "target_statistics": {
+                                "mean": round(float(target_data.mean()), 3),
+                                "std": round(float(target_data.std()), 3),
+                                "min": int(target_data.min()),
+                                "max": int(target_data.max()),
+                                "median": float(target_data.median())
+                            },
+                            "data_quality": {
+                                "missing_descriptions": int(df['Description'].isna().sum()),
+                                "missing_equipment_ids": int(df['Num_equipement'].isna().sum()),
+                                "missing_targets": int(df[target_col].isna().sum()),
+                                "duplicate_records": int(df.duplicated().sum())
+                            }
+                        }
+                except Exception as e:
+                    metrics["training_statistics"][model_type] = {
+                        "error": f"Failed to analyze {filename}: {str(e)}"
+                    }
+            else:
+                metrics["training_statistics"][model_type] = {
+                    "error": f"Training data file {filename} not found"
+                }
+        
+        # === MODEL PERFORMANCE EVALUATION ===
+        for model_type in ['availability', 'fiability', 'process_safety']:
+            try:
+                # Use recent data for evaluation (last 20% of records)
+                data_file = data_files[model_type]
+                if os.path.exists(data_file):
+                    df = pd.read_csv(data_file)
+                    target_cols = {
+                        'availability': 'Disponibilté',
+                        'fiability': 'Fiabilité Intégrité',
+                        'process_safety': 'Process Safety'
+                    }
+                    target_col = target_cols[model_type]
+                    
+                    if target_col in df.columns and len(df) > 50:
+                        # Use last 20% as test set (minimum 10, maximum 200 records)
+                        test_size = max(10, min(200, int(len(df) * 0.2)))
+                        test_df = df.tail(test_size).copy()
+                        
+                        # Get predictions for test set
+                        predictions = []
+                        actuals = []
+                        
+                        for _, row in test_df.iterrows():
+                            try:
+                                if model_type == 'availability':
+                                    pred, _, _ = predictor.availability_predictor.predict_availability(
+                                        row['Description'], 
+                                        row['Description de l\'équipement'], 
+                                        row['Num_equipement']
+                                    )
+                                elif model_type == 'fiability':
+                                    pred, _, _ = predictor.fiability_predictor.predict_fiability(
+                                        row['Description'], 
+                                        row['Description de l\'équipement'], 
+                                        row['Num_equipement']
+                                    )
+                                else:  # process_safety
+                                    pred, _, _ = predictor.process_safety_predictor.predict_process_safety(
+                                        row['Description'], 
+                                        row['Description de l\'équipement'], 
+                                        row['Num_equipement']
+                                    )
+                                
+                                predictions.append(pred)
+                                actuals.append(row[target_col])
+                            except:
+                                continue
+                        
+                        if len(predictions) > 5:  # Need at least 5 predictions for meaningful metrics
+                            predictions = np.array(predictions)
+                            actuals = np.array(actuals)
+                            
+                            # Calculate regression metrics
+                            mae = mean_absolute_error(actuals, predictions)
+                            mse = mean_squared_error(actuals, predictions)
+                            rmse = np.sqrt(mse)
+                            r2 = r2_score(actuals, predictions)
+                            
+                            # Calculate custom accuracy (within 0.5 score range)
+                            accuracy_05 = np.mean(np.abs(predictions - actuals) <= 0.5) * 100
+                            accuracy_10 = np.mean(np.abs(predictions - actuals) <= 1.0) * 100
+                            
+                            # Calculate bias
+                            bias = np.mean(predictions - actuals)
+                            
+                            metrics["model_performance"][model_type] = {
+                                "test_samples": len(predictions),
+                                "regression_metrics": {
+                                    "mae": round(mae, 4),
+                                    "mse": round(mse, 4),
+                                    "rmse": round(rmse, 4),
+                                    "r2_score": round(r2, 4)
+                                },
+                                "accuracy_metrics": {
+                                    "accuracy_within_0.5": round(accuracy_05, 2),
+                                    "accuracy_within_1.0": round(accuracy_10, 2)
+                                },
+                                "prediction_statistics": {
+                                    "mean_prediction": round(float(np.mean(predictions)), 3),
+                                    "mean_actual": round(float(np.mean(actuals)), 3),
+                                    "bias": round(bias, 4),
+                                    "prediction_std": round(float(np.std(predictions)), 3),
+                                    "actual_std": round(float(np.std(actuals)), 3)
+                                },
+                                "score_distribution": {
+                                    "predicted": {
+                                        f"score_{i}": int(np.sum((predictions >= i-0.5) & (predictions < i+0.5)))
+                                        for i in range(1, 6)
+                                    },
+                                    "actual": {
+                                        f"score_{i}": int(np.sum(actuals == i))
+                                        for i in range(1, 6)
+                                    }
+                                }
+                            }
+                        else:
+                            metrics["model_performance"][model_type] = {
+                                "error": "Insufficient test data for evaluation"
+                            }
+                    else:
+                        metrics["model_performance"][model_type] = {
+                            "error": "Insufficient training data for evaluation"
+                        }
+                else:
+                    metrics["model_performance"][model_type] = {
+                        "error": f"Training data file not found: {data_file}"
+                    }
+            except Exception as e:
+                metrics["model_performance"][model_type] = {
+                    "error": f"Performance evaluation failed: {str(e)}"
+                }
+        
+        # === TRAINING HISTORY ===
+        training_status = training_manager.get_training_status()
+        metrics["training_history"] = {
+            "total_training_sessions": training_status["training_sessions_completed"],
+            "last_training": training_status["last_training"],
+            "available_backups": training_status["available_backups"],
+            "is_currently_training": training_status["is_training"]
+        }
+        
+        # === OVERALL SUMMARY ===
+        # Calculate overall model health score
+        performance_scores = []
+        for model_type in ['availability', 'fiability', 'process_safety']:
+            if model_type in metrics["model_performance"] and "regression_metrics" in metrics["model_performance"][model_type]:
+                r2 = metrics["model_performance"][model_type]["regression_metrics"]["r2_score"]
+                acc_05 = metrics["model_performance"][model_type]["accuracy_metrics"]["accuracy_within_0.5"]
+                # Combine R2 and accuracy for overall score
+                model_score = (r2 * 50) + (acc_05 * 0.5)  # Scale to 0-100
+                performance_scores.append(max(0, min(100, model_score)))
+        
+        overall_health = np.mean(performance_scores) if performance_scores else 0
+        
+        # Determine health status
+        if overall_health >= 80:
+            health_status = "EXCELLENT"
+        elif overall_health >= 70:
+            health_status = "GOOD"
+        elif overall_health >= 60:
+            health_status = "FAIR"
+        elif overall_health >= 40:
+            health_status = "POOR"
+        else:
+            health_status = "CRITICAL"
+        
+        metrics["summary"] = {
+            "overall_model_health": round(overall_health, 2),
+            "health_status": health_status,
+            "models_evaluated": len(performance_scores),
+            "total_training_records": sum([
+                metrics["training_statistics"][model]["total_records"] 
+                for model in metrics["training_statistics"] 
+                if "total_records" in metrics["training_statistics"][model]
+            ]),
+            "recommendations": []
+        }
+        
+        # Add recommendations based on metrics
+        if overall_health < 70:
+            metrics["summary"]["recommendations"].append("Consider retraining models with more diverse data")
+        
+        if metrics["training_history"]["total_training_sessions"] == 0:
+            metrics["summary"]["recommendations"].append("No incremental training performed yet - consider training with new data")
+        
+        for model_type in metrics["training_statistics"]:
+            if "data_quality" in metrics["training_statistics"][model_type]:
+                quality = metrics["training_statistics"][model_type]["data_quality"]
+                if quality["missing_descriptions"] > quality.get("total_records", 0) * 0.1:
+                    metrics["summary"]["recommendations"].append(f"High missing description rate in {model_type} data - data quality improvement needed")
+        
+        print("✅ Model metrics calculated successfully")
+        return jsonify(metrics), 200
+        
+    except Exception as e:
+        print(f"❌ Error calculating model metrics: {e}")
+        traceback.print_exc()
+        return jsonify({
+            "error": "Failed to calculate model metrics",
+            "message": str(e),
+            "timestamp": datetime.now().isoformat()
+        }), 500
+
+@app.route('/train', methods=['POST'])
+def train_models():
+    """
+    Train models with new anomaly data
+    
+    Expected JSON payload:
+    [
+        {
+            "anomaly_id": "unique_id",
+            "description": "anomaly description", 
+            "equipment_name": "equipment name",
+            "equipment_id": "equipment uuid",
+            "availability_score": 3,
+            "fiability_score": 2,
+            "process_safety_score": 4
+        }
+        // ... more training records (max 1000)
+    ]
+    """
+    try:
+        # Get JSON data from request
+        data = request.get_json()
+        
+        if not data:
+            return jsonify({
+                "error": "No JSON data provided",
+                "message": "Please send training data in request body"
+            }), 400
+        
+        print(f"🎯 Received training request with {len(data) if isinstance(data, list) else 1} records")
+        
+        # Ensure data is a list
+        if not isinstance(data, list):
+            data = [data]
+        
+        # Start training process
+        result = training_manager.train_with_new_data(data)
+        
+        if result["success"]:
+            return jsonify(result), 200
+        else:
+            return jsonify(result), 400
+            
+    except Exception as e:
+        print(f"❌ Training endpoint error: {e}")
+        traceback.print_exc()
+        return jsonify({
+            "error": "Training failed",
+            "message": str(e),
+            "success": False
+        }), 500
+
+@app.route('/train/status', methods=['GET'])
+def training_status():
+    """Get current training status and history"""
+    try:
+        status = training_manager.get_training_status()
+        return jsonify(status), 200
+    except Exception as e:
+        return jsonify({
+            "error": "Failed to get training status",
+            "message": str(e)
+        }), 500
+
+@app.route('/train/reload', methods=['POST'])
+def reload_models():
+    """
+    Reload models after training to use the updated versions
+    This is useful after training to refresh the prediction API
+    """
+    try:
+        global predictor
+        
+        print("🔄 Reloading models after training...")
+        success = initialize_models()
+        
+        if success:
+            return jsonify({
+                "success": True,
+                "message": "Models reloaded successfully",
+                "models_loaded": predictor is not None
+            }), 200
+        else:
+            return jsonify({
+                "success": False,
+                "message": "Failed to reload models",
+                "models_loaded": False
+            }), 500
+            
+    except Exception as e:
+        print(f"❌ Model reload error: {e}")
+        return jsonify({
+            "error": "Model reload failed",
+            "message": str(e),
+            "success": False
+        }), 500
+
+@app.route('/train/backups', methods=['GET'])
+def list_backups():
+    """List available model backups"""
+    try:
+        import os
+        backup_dir = training_manager.backup_dir
+        
+        if not os.path.exists(backup_dir):
+            return jsonify({
+                "backups": [],
+                "count": 0
+            }), 200
+        
+        backups = []
+        for item in os.listdir(backup_dir):
+            backup_path = os.path.join(backup_dir, item)
+            if os.path.isdir(backup_path) and item.startswith('backup_'):
+                # Parse timestamp from backup name
+                timestamp_str = item.replace('backup_', '')
+                try:
+                    from datetime import datetime
+                    timestamp = datetime.strptime(timestamp_str, '%Y%m%d_%H%M%S')
+                    formatted_time = timestamp.strftime('%Y-%m-%d %H:%M:%S')
+                except:
+                    formatted_time = timestamp_str
+                
+                backups.append({
+                    "name": item,
+                    "created": formatted_time,
+                    "path": backup_path
+                })
+        
+        # Sort by creation time (newest first)
+        backups.sort(key=lambda x: x['name'], reverse=True)
+        
+        return jsonify({
+            "backups": backups,
+            "count": len(backups)
+        }), 200
+        
+    except Exception as e:
+        return jsonify({
+            "error": "Failed to list backups",
+            "message": str(e)
+        }), 500
+
+@app.route('/train/restore/<backup_name>', methods=['POST'])
+def restore_backup(backup_name):
+    """Restore models from a specific backup"""
+    try:
+        result = training_manager.restore_backup(backup_name)
+        
+        if result["success"]:
+            # Reload models after restore
+            global predictor
+            initialize_models()
+            
+            return jsonify({
+                **result,
+                "models_reloaded": True
+            }), 200
+        else:
+            return jsonify(result), 400
+            
+    except Exception as e:
+        return jsonify({
+            "error": "Backup restore failed",
+            "message": str(e),
+            "success": False
+        }), 500
+
 @app.errorhandler(404)
 def not_found(error):
     return jsonify({
@@ -348,5 +815,11 @@ if __name__ == '__main__':
     print("📡 API Endpoints:")
     print("  GET  /health - Health check")
     print("  GET  /models/info - Model information") 
+    print("  GET  /models/metrics - Model performance metrics")
     print("  POST /predict - Make predictions (single or batch)")
+    print("  POST /train - Train models with new data")
+    print("  GET  /train/status - Training status")
+    print("  POST /train/reload - Reload models")
+    print("  GET  /train/backups - List backups")
+    print("  POST /train/restore/<backup> - Restore backup")
     app.run(host='0.0.0.0', port=5000, debug=True) 
