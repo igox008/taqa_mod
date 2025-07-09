@@ -4750,8 +4750,8 @@ dcd4635e-ec4c-43ec-90f2-3ff21755c46a,f771d801-5357-4818-976c-6a8102fuite MF par 
 9b3a7a9d-d794-49ff-b9a3-4c706490d037,59cc68ec-008f-41fe-8137-5aeddb9ba9de,Apparition alarme (30BRA00EG001_XG01).,2024-04-14 08:55:26,Tableau distribution 220 AC UPS -U3,34EL,1,4,1,6
 9b3a7a9d-d794-49ff-b9a3-4c706490d037,59cc68ec-008f-41fe-8137-5aeddb9ba9de,Apparition alarme (30BRA00EG001_XG01).,2024-04-14 08:55:26,Tableau distribution 220 AC UPS -U3,34EL,1,4,1,6
 a7489686-de34-4bf2-9f204e806b267,c111ab6f-a961-43ce-b8fe-54b2abf73628,"Prévoir le nettoyage des filtres moteur broyeur ""D""",2024-04-14 08:55:28,MOTEUR BROYEUR D,34EL,1,1,2,4
-a7489686-de34-4bf2-9f20-ad24e806b267,c111ab6f-a961-43ce-b8fe-54b2abf73628,"Prévoir le nettoyage des filtres moteur broyeur ""D""",2024-04-14 08:55:28,MOTEUR BROYEUR D,34EL,1,1,2,4
-3f68d058-b105-46f0-b137-6ce7695b85d1,e4f67f5f-be46-4ce0-ad14-68575d3cf0cd,SAFETY : Fuite par bride  radiateur du transformateur principal,2024-04-14 08:55:38,TRANSFO PRINCIPAL,L,5,5,5,15
+a7489686-de34-4bf2-9f du transformateur principal20-ad24e806b267,c111ab6f-a961-43ce-b8fe-54b2abf73628,"Prévoir le nettoyage des filtres moteur broyeur ""D""",2024-04-14 08:55:28,MOTEUR BROYEUR D,34EL,1,1,2,4
+3f68d058-b105-46f0-b137-6ce7695b85d1,e4f67f5f-be46-4ce0-ad14-68575d3cf0cd,SAFETY : Fuite par bride  radiateur,2024-04-14 08:55:38,TRANSFO PRINCIPAL,L,5,5,5,15
 3f68d058-b105-46f0-b137-6ce7695b85d1,e4f67f5f-be46-4ce0-ad14-68575d3cf0cd,SAFETY : Fuite par bride  radiateur du transformateur principal,2024-04-14 08:55:38,TRANSFO PRINCIPAL,34EL,5,5,5,15
 b9cd5800-9776-4655-b404-4745cab8fa79,ea20dd26-5178-4fab-ac36-5855da36d870,température air moteur à 44 °C,2024-04-14 08:55:40,CWP10 MOTOR AIR TEMP,34EL,1,3,2,6
 b9cd5800-9776-4655-b404-4745cab8fa79,ea20dd26-5178-4fab-ac36-5855da36d870,température air moteur à 44 °C,2024-04-14 08:55:40,CWP10 MOTOR AIR TEMP,3,2,6

@@ -81,19 +81,19 @@ def process_single_anomaly(anomaly_data):
             "equipment_name": anomaly_data['equipment_name'],
             "predictions": {
                 "availability": {
-                    "score": round(results['predictions']['availability'], 3),
+                    "score": round(results['predictions']['availability']),
                     "description": "Equipment uptime and operational readiness"
                 },
                 "reliability": {
-                    "score": round(results['predictions']['fiability'], 3), 
+                    "score": round(results['predictions']['fiability']), 
                     "description": "Equipment integrity and dependability"
                 },
                 "process_safety": {
-                    "score": round(results['predictions']['process_safety'], 3),
+                    "score": round(results['predictions']['process_safety']),
                     "description": "Safety risk assessment and hazard identification"
                 }
             },
-            "overall_score": round(results['predictions']['overall_score'], 3),
+            "overall_score": round(results['predictions']['overall_score']),
             "risk_assessment": {
                 "overall_risk_level": results['risk_assessment']['overall_risk_level'],
                 "recommended_action": results['risk_assessment']['recommended_action'],
